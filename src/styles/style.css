@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.App {
+    display: grid;
+    width: 8.5in;
+    height: 12in;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px max-content max-content;
+    gap: 1rem;
+    /* A4 box shadow */
+    box-shadow: 0 3px -3px rgba(0,0,0,0.7);
+}
+
+.header {
+    display: grid;
+    grid-column: 1 / -1;
+    place-content: center;
+    background-color: darkgrey;
+    color: white;
+    box-shadow: 0 0 1rem black;
+}
+
+section {
+    margin: 0rem 0.5rem;
+    width: 100%;
+    display: grid;
+    position: relative;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.5rem 1rem;
+    border: 2px solid red;
+    border-radius: 1rem;
+    grid-column: 1 / -1;
+}
+
+section h2 {
+    font-size: 2.25rem;
+    justify-self: center;
+}
+
+section button {
+    display: none;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 5rem;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+section.personal,
+section.personal input {
+    grid-template-columns: 1fr 40%;
+    grid-template-rows: 1fr 1fr 1fr;
+    font-size: 1.4rem;
+    text-align: right;
+}
+
+section.personal input {
+    font-family: inherit;
+    padding: 0rem;
+    border: none;
+    outline: 1px solid black;
+    color: grey;
+}
+
+section.personal p:first-of-type,
+section.personal input:first-of-type {
+    font-size: 3rem;
+    width: 100%;
+    font-weight: 600;
+    grid-row: 1 / -1;
+    text-align: center;
+    place-self: center;
+}
