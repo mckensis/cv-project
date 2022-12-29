@@ -81,7 +81,7 @@ class Personal extends Component {
                         onMouseOver={this.handleMouseOver}
                         onMouseOut={this.handleMouseOut}>
                 <p className="name" data-length="20" data-placeholder="Name">Aidan Mckenzie</p>
-                <p className="contact" data-length="15" data-placeholder="Contact No.">07985 120 283</p>
+                <p className="contact" data-length="15" data-placeholder="Contact No.">01234 567 890</p>
                 <p className="email" data-length="30" data-placeholder="Email Address">adn.mck@gmail.com</p>
                 <p className="website" data-length="35" data-placeholder="Website">https://mckensis.github.io/</p>
                 <button onClick={this.handleButtonClick.bind(this)}>Edit</button>
