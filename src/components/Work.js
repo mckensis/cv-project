@@ -1,27 +1,12 @@
-import { Component } from "react";
-
-class Work extends Component {
-    constructor() {
-        super();
-
-        this.remove = 'a';
-    }
-
-    render() {
-        return(
-            <section className="work">
-                <h2>Employment</h2>
-                <p>The Merchant Glasgow</p>
-                <p>Assistant Manager</p>
-                <p>2014 - 2022</p>
-                <p>Cash Handling</p>
-                <p>Rotas</p>
-                <p>Labour</p>
-                <p>Stock Management</p>
-                <button>Edit</button>
-            </section>
-        )
-    }
-} 
+const Work = () => {
+  return (
+    <section className="work">
+      <h2>Employment</h2>
+      <p>Where</p>
+      <p>Job Title</p>
+      <p>Dates</p>
+    </section>
+  )
+}
 
 export default Work;

@@ -1,93 +1,87 @@
-import { Component } from "react";
+import { useState } from "react";
 
-class Personal extends Component {
-    constructor() {
-        super();
-        this.state = {
-            mode: 'view',
-        }
-    }
+const Personal = () => {
 
-    handleMouseOver() {
-        const button = document.querySelector('.personal button');
-        button.style.display = 'block';
-    }
+  const [isHovering, setIsHovering] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
+  const [website, setWebsite] = useState('');
 
-    handleMouseOut() {
-        const button = document.querySelector('.personal button');
-        if (button.textContent === 'Edit') {
-            button.style.display = 'none';
-        }
-    }
+  return (
+    <section
+      className="personal"
+      onMouseOver={() => setIsHovering(true)}
+      onMouseOut={() => setIsHovering(false)}
+    >
+      {!isEditing
+        && <>
+        <p className="name">{name ? name : 'Full Name'}</p>
+        <p className="contact">{phoneNumber ? phoneNumber : 'Contact No.'}</p>
+        <p className="email">{emailAddress ? emailAddress : 'Email Address'}</p>
+        <p className="website">{website ? website : 'Website'}</p>
+        </>
+      }
 
-    handleEditSection() {
-        const personalInfo = document.querySelectorAll('.personal p');
+      {isEditing
+        && <>
+          {/* Name input */}
+          <label htmlFor="name" tabIndex={-1}>Name</label>
+          <input
+            type="text"
+            className="name"
+            value={name}
+            name="name"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            autoFocus
+            placeholder="Full Name"
+            maxLength='20'
+          />
+          {/* Phone number input */}
+          <label htmlFor="contact" tabIndex={-1}>Name</label>
+          <input
+            type="text"
+            className="contact"
+            value={phoneNumber}
+            name="contact"
+            id="contact"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="Contact No."
+            />
+          {/* Email address input */}
+          <label htmlFor="email" tabIndex={-1}>Name</label>
+          <input
+            type="text"
+            className="email"
+            value={emailAddress}
+            name="email"
+            id="email"
+            onChange={(e) => setEmailAddress(e.target.value)}
+            placeholder="Email Address"
+          />
+          {/* Website input */}
+          <label htmlFor="website" tabIndex={-1}>Name</label>
+          <input
+            type="text"
+            className="website"
+            value={website}
+            name="website"
+            id="website"
+            onChange={(e) => setWebsite(e.target.value)}
+            placeholder="Website"
+          />
+        </>
+      }
 
-        personalInfo.forEach(p => {
-            const parent = p.parentElement;
-            const input = document.createElement('input');
-            input.value = p.textContent;
-            input.setAttribute('maxlength', p.dataset.length);
-            input.setAttribute('placeholder', p.dataset.placeholder);
-            parent.removeChild(p);
-            parent.append(input);
-        })
-    }
-
-    handleSaveSection() {
-        const inputs = Array.from(document.querySelectorAll('.personal input'));
-        
-        inputs.forEach(input => {
-            const parent = input.parentElement;
-            const field = document.createElement('p');
-            if (!input.value) {
-                field.textContent = input.placeholder;
-            } else {
-                field.textContent = input.value;
-            }
-            field.setAttribute('data-length', input.maxLength);
-            field.setAttribute('data-placeholder', input.placeholder);
-            parent.removeChild(input);
-            parent.append(field);
-        })
-    }
-    
-    handleButtonClick() {
-        const button = document.querySelector('.personal button');
-
-        switch (button.textContent) {
-            case 'Edit':
-                this.handleEditSection();
-                this.setState({
-                    mode: 'edit',
-                })
-                button.textContent = 'Save';
-                break;
-            case 'Save':
-                this.handleSaveSection();
-                this.setState({
-                    mode: 'view',
-                })
-                button.textContent = 'Edit';
-                break;
-            default:
-                break;
-        }
-    }
-
-    render() {
-        return(
-            <section className="personal"
-                        onMouseOver={this.handleMouseOver}
-                        onMouseOut={this.handleMouseOut}>
-                <p className="name" data-length="20" data-placeholder="Name">Aidan Mckenzie</p>
-                <p className="contact" data-length="15" data-placeholder="Contact No.">01234 567 890</p>
-                <p className="email" data-length="30" data-placeholder="Email Address">adn.mck@gmail.com</p>
-                <p className="website" data-length="35" data-placeholder="Website">https://mckensis.github.io/</p>
-                <button onClick={this.handleButtonClick.bind(this)}>Edit</button>
-            </section>
-        )
-    }
-} 
+      {isHovering && !isEditing ?
+        <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
+        : null
+      }
+      {isEditing && <button className="mode" onClick={() => setIsEditing(false)}>Save</button>}
+    </section>
+  )
+}
 
 export default Personal;

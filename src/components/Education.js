@@ -1,94 +1,70 @@
-import { Component } from "react";
+import { useState } from "react";
+import EducationArticle from "./EducationArticle";
+import NewEducationForm from "./NewEducationForm";
 
-class Education extends Component {
-    constructor() {
-        super();
+const Education = () => {
+  
+  const [sectionEnabled, setSectionEnabled] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newEducation, setNewEducation] = useState(false);
+  const [education, setEducation] = useState([
+    {
+      year: '3000 - 3001',
+      location: 'A College',
+      course: 'Cooking up a storm'
+    },
+    {
+      year: '1000 - 1999',
+      location: 'School of hard rocks xoxo',
+      course: '2 standard grades'
+    }
+  ]);
 
-        this.state = {
-            mode: 'view',
+  return (
+    <section
+      className="education"
+      onMouseOver={() => setIsHovering(true)}
+      onMouseOut={() => setIsHovering(false)}
+    >
+
+      {sectionEnabled && <>
+        <h2>Education</h2>
+
+        {/* If there is any education to display */}
+        {education.length > 0 &&
+          education.map((edu, idx) => (
+            <EducationArticle key={idx} education={edu}/>)
+          )
         }
-    }
 
-    handleMouseOver() {
-        const button = document.querySelector('.education button');
-        button.style.display = 'block';
-    }
-
-    handleMouseOut() {
-        const button = document.querySelector('.education button');
-        if (button.textContent === 'Edit') {
-            button.style.display = 'none';
+        {isEditing &&
+          <button className="remove" onClick={() => setSectionEnabled(false)}>Remove Section</button>
         }
-    }
-
-    handleEditSection() {
-        const educationInfo = document.querySelectorAll('.education p');
-
-        educationInfo.forEach(p => {
-            const parent = p.parentElement;
-            const input = document.createElement('input');
-            input.value = p.textContent;
-            input.setAttribute('maxlength', p.dataset.length);
-            input.setAttribute('placeholder', p.dataset.placeholder);
-            parent.removeChild(p);
-            parent.append(input);
-        })
-    }
-
-    handleSaveSection() {
-        const inputs = Array.from(document.querySelectorAll('.education input'));
-        
-        inputs.forEach(input => {
-            const parent = input.parentElement;
-            const field = document.createElement('p');
-            if (!input.value) {
-                field.textContent = input.placeholder;
-            } else {
-                field.textContent = input.value;
-            }
-            field.setAttribute('data-length', input.maxLength);
-            field.setAttribute('data-placeholder', input.placeholder);
-            parent.removeChild(input);
-            parent.append(field);
-        })
-    }
-    
-    handleButtonClick() {
-        const button = document.querySelector('.education button');
-
-        switch (button.textContent) {
-            case 'Edit':
-                this.handleEditSection();
-                this.setState({
-                    mode: 'edit',
-                })
-                button.textContent = 'Save';
-                break;
-            case 'Save':
-                this.handleSaveSection();
-                this.setState({
-                    mode: 'view',
-                })
-                button.textContent = 'Edit';
-                break;
-            default:
-                break;
+        {isHovering && !isEditing &&
+          <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
         }
-    }
+        {isEditing &&
+          <button className="mode" onClick={() => setIsEditing(false)}>Save</button>
+        }
+        {isEditing && !newEducation &&
+          <button onClick={() => setNewEducation(true)}>Add New Education</button>
+        }
 
-    render() {
-        return(
-            <section className="education"
-                     onMouseOver={this.handleMouseOver}
-                     onMouseOut={this.handleMouseOut}>
-                <h2>Education</h2>
-                <p>Ayr College</p>
-                <p>NC Computing & IT</p>
-                <p>2010 - 2011</p>
-                <button onClick={this.handleButtonClick.bind(this)}>Edit</button>
-            </section>
-        )
-    }
+        {newEducation && 
+          <NewEducationForm
+            education={education}
+            setNewEducation={setNewEducation}
+            setEducation={setEducation}
+          />
+        }
+      </>}
+
+      {!sectionEnabled &&
+        <button onClick={() => setSectionEnabled(true)}>Add Education Section</button>
+      }
+    </section>
+  )
 }
 
 export default Education;
