@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { v4 as uuid } from "uuid";
 
-const NewEducationForm = ({ education, setEducation, setNewEducation }) => {
+const NewEducationForm = ({ education, setEducation, setNewEducationFormVisible }) => {
   
   const [year, setYear] = useState('');
   const [location, setLocation] = useState('');
   const [course, setCourse] = useState('');
 
   const addNewEducation = (e) => {
-    const newEducation = { year, location, course };
+    const newEducation = { year, location, course, id: uuid() };
     const updatedEducation = [...education, newEducation];
     setEducation(updatedEducation);
-    setNewEducation(false);
+    setNewEducationFormVisible(false);
   }
   
   return (
@@ -49,7 +50,7 @@ const NewEducationForm = ({ education, setEducation, setNewEducation }) => {
         onChange={(e) => setCourse(e.target.value)}
         required
       />
-      <button type="button" onClick={() => setNewEducation(false)}>Cancel</button>
+      <button type="button" onClick={() => setNewEducationFormVisible(false)}>Cancel</button>
       <button type="submit">Submit</button>
     </form>
   )
