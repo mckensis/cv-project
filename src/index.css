@@ -56,12 +56,12 @@ main {
 
 .personal,
 .work,
-.education {
+.education,
+.about {
   display: grid;
   position: relative;
   gap: 0.5rem;
   align-content: start;
-  border-radius: 1rem;
   grid-column: 1 / -1;
 }
 
@@ -146,7 +146,7 @@ section.personal button.mode {
 }
 
 section.personal {
-  grid-template-columns: 1fr 40%;
+  grid-template-columns: 1fr 45%;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 0;
 }
@@ -184,6 +184,13 @@ label {
   opacity: 0;
   top: 0;
   left: 0;
+}
+
+.about textarea {
+  width: 100%;
+  height: 5rem;
+  font: inherit;
+  padding: 0.25rem;
 }
 
 .education-article {

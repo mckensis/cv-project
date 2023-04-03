@@ -65,7 +65,7 @@ const Education = () => {
 
       {sectionEnabled && <>
         {/* Heading */}
-        {isEditing ? <h2 className="editing">Education</h2> : <h2>Education</h2>}
+        <h2 className={isEditing ? "editing" : null}>Education</h2>
 
         {/* Education Articles if there is any education to display */}
         {EducationArticles()}
@@ -81,11 +81,14 @@ const Education = () => {
         }
 
         {/* Save section button */}
-        {isEditing ?
-          countEditing === 0 ?
-            <button className="mode" onClick={() => handleSaveSection()}>Save</button>
-            : <button className="mode" disabled title="Save or delete any section entries currently in edit mode to save.">Save</button>
-          : null
+        {isEditing &&
+          <button
+            className="mode"
+            onClick={() => handleSaveSection()}
+            disabled={countEditing === 0 ? null : true}
+          >
+            Save
+          </button>
         }
 
         {/* Add education history button */}

@@ -17,10 +17,10 @@ const Personal = () => {
     >
       {!isEditing
         && <>
-        <p className="name">{name ? name : 'Full Name'}</p>
-        <p className="contact">{phoneNumber ? phoneNumber : 'Contact No.'}</p>
-        <p className="email">{emailAddress ? emailAddress : 'Email Address'}</p>
-        <p className="website">{website ? website : 'Website'}</p>
+        <p className="name">{name ? name : 'Name Surname'}</p>
+        <p className="contact">{phoneNumber ? phoneNumber : '07890 123 456'}</p>
+        <p className="email">{emailAddress ? emailAddress : 'email@address.com'}</p>
+        <p className="website">{website ? website : 'https://www.website.com'}</p>
         </>
       }
 
@@ -37,7 +37,7 @@ const Personal = () => {
             onChange={(e) => setName(e.target.value)}
             autoFocus
             placeholder="Full Name"
-            maxLength='20'
+            maxLength="20"
           />
           {/* Phone number input */}
           <label htmlFor="contact" tabIndex={-1}>Name</label>
@@ -47,6 +47,7 @@ const Personal = () => {
             value={phoneNumber}
             name="contact"
             id="contact"
+            maxLength="20"
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="Contact No."
             />
@@ -58,6 +59,7 @@ const Personal = () => {
             value={emailAddress}
             name="email"
             id="email"
+            maxLength="30"
             onChange={(e) => setEmailAddress(e.target.value)}
             placeholder="Email Address"
           />
@@ -69,6 +71,7 @@ const Personal = () => {
             value={website}
             name="website"
             id="website"
+            maxLength="30"
             onChange={(e) => setWebsite(e.target.value)}
             placeholder="Website"
           />
