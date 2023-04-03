@@ -133,7 +133,7 @@ button.edit.education-item {
 .button-container {
   display: flex;
   flex-grow: 1;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 0.5rem;
   grid-column: 1 / -1;
   margin-top: 0.5rem;

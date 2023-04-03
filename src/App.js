@@ -1,7 +1,7 @@
-import Education from "./components/Education";
-import Header from "./components/Header";
-import Personal from "./components/Personal";
-import Work from "./components/Work";
+import Header from "./views/Header";
+import Personal from "./views/Personal";
+import Work from "./views/work/Work";
+import Education from "./views/education/Education";
 
 function App() {
   return (
