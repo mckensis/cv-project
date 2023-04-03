@@ -1,9 +1,11 @@
 const WorkArticleEditForm = ({ 
   workYear, setWorkYear, workDescription, setWorkDescription,
+  handleDelete, handleSave,
   workTitle, setWorkTitle, workCompany, setWorkCompany }) => {
 
     return (
       <form className="work-item-edit-form" onSubmit={(e) => e.preventDefault()}>
+        <section className="form-container">
         {/* Year input */}
         <label htmlFor="year" tabIndex={-1}>Date</label>
         <input
@@ -28,7 +30,7 @@ const WorkArticleEditForm = ({
           placeholder="Job Title"
           minLength="1"
           maxLength="20"
-          />
+        />
         {/* Company input */}
         <label htmlFor="company" tabIndex={-1}>Company</label>
         <input
@@ -50,10 +52,27 @@ const WorkArticleEditForm = ({
           onChange={(e) => setWorkDescription(e.target.value)}
           placeholder="Description of the job"
           minLength="1"
-          maxLength="500"
-
+          maxLength="500"  
         >
         </textarea>
+          </section>
+          <section className="button-container">
+            <button
+              className="delete"
+              type="button"
+              onClick={() => handleDelete()}
+            >
+              Delete
+            </button>
+            
+            <button
+              className="save"
+              type="button"
+              onClick={(e) => handleSave(e)}
+            >
+              Save
+            </button>
+          </section>
       </form>
     )
 }

@@ -1,10 +1,19 @@
 const EducationArticleEditForm = ({ 
-  educationYear, setEducationYear,
+  educationYear, setEducationYear, handleSave, handleDelete,
   educationLocation, setEducationLocation, educationCourse, setEducationCourse }) => {
 
-    return (
-      <form className="education-item-edit-form" onSubmit={(e) => e.preventDefault()}>
-        {/* Year input */}
+  const validateForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (form.checkValidity()) {
+      handleSave();
+    }
+  }
+
+  return (
+    <form className="education-item-edit-form" onSubmit={(e) => validateForm(e)}>
+      <section className="form-container">
+      {/* Year input */}
         <label htmlFor="year" tabIndex={-1}>Date</label>
         <input
           type="text"
@@ -30,7 +39,7 @@ const EducationArticleEditForm = ({
           onChange={(e) => setEducationLocation(e.target.value)}
           placeholder="Location"
           required
-          />
+        />
         {/* Company input */}
         <label htmlFor="course" tabIndex={-1}>Course</label>
         <input
@@ -44,8 +53,26 @@ const EducationArticleEditForm = ({
           placeholder="Course"
           required
         />
-      </form>
-    )
+        </section>
+
+        {/* Delete / Save buttons */}
+        <section className="button-container">
+          <button
+            className="delete"
+            type="button"
+            onClick={() => handleDelete()}
+          >
+            Delete
+          </button>
+          <button
+            className="save"
+            type="submit"
+          >
+            Save
+          </button>
+        </section>
+    </form>
+  )
 }
 
 export default EducationArticleEditForm;

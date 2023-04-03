@@ -114,7 +114,6 @@ button.remove {
 
 /* Edit... button */
 button.edit {
-  grid-row: 5;
   grid-column: 2;
   justify-self: end;
 }
@@ -236,12 +235,17 @@ label {
 
 .education-item-edit-form {
   display: flex;
+  flex-direction: column;
+  background-color: #efefef;
+  padding: 0.5rem;
+}
+
+.education-item-edit-form .form-container {
+  display: flex;
   flex-basis: 100%;
   justify-content: center;
   flex-direction: row;
-  background-color: #efefef;
   gap: 0.5rem;
-  padding: 1rem;
 }
 
 .education-item-edit-form input {
@@ -266,12 +270,11 @@ label {
   flex-basis: 125%;
 }
 
-
 .work-article {
   position: relative;
   display: grid;
   grid-template-columns: minmax(130px, min-content) 1fr;
-  grid-template-rows: repeat(4, max-content);
+  grid-template-rows: repeat(2, max-content);
   row-gap: 0.25rem;
   column-gap: 10px;
   background-color: #efefef;
@@ -280,28 +283,19 @@ label {
 }
 
 .work-article > p {
-  grid-column: 2;
-  grid-row: 1 / -1;
   text-align: justify;
-  align-self: center;
+  min-height: min-content;
 }
 
-.work-article button {
-  top: 0.25rem;
+.work-section {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.work-section p:nth-of-type(1) {
+.work-section li:nth-of-type(1) {
   font-weight: 600;
-  grid-row: 1;
-  grid-column: 1;
-}
-.work-section p:nth-of-type(2) {
-  grid-row: 2;
-  grid-column: 1;
-}
-.work-section p:nth-of-type(3) {
-  grid-row: 3;
-  grid-column: 1;
 }
 
 /* Add new work form */
@@ -335,14 +329,22 @@ label {
 }
 
 .work-item-edit-form {
+  display: flex;
   grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  flex-direction: column;
+  background-color: #efefef;
+  padding: 0.5rem 0rem;
+  justify-content: stretch;
+}
+
+.work-item-edit-form .form-container {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 130px 1fr;
   grid-template-rows: repeat(3, max-content);
   row-gap: 0.25rem;
-  column-gap: 1rem;
+  column-gap: 10px;
   background-color: #efefef;
-  min-height: 2.5rem;
 }
 
 .work-item-edit-form input {
@@ -350,9 +352,12 @@ label {
   outline: none;
   border: none;
   box-shadow: none;
+  min-width: 0;
+  width: 100%;
 }
 
 .work-item-edit-form input:nth-of-type(1) {
+  font-weight: 600;
   grid-row: 1;
   grid-column: 1;
 }

@@ -21,8 +21,7 @@ const EducationArticle = ({ education, setEducation, item, isEditing, countEditi
     setCountEditing(count);
   }
 
-  const handleSave = (e) => {
-    console.log(e);
+  const handleSave = () => {
     const count = countEditing - 1;
     setIsEditingEducationArticle(false);
     setCountEditing(count);
@@ -56,24 +55,9 @@ const EducationArticle = ({ education, setEducation, item, isEditing, countEditi
             educationCourse={educationCourse}
             setEducationCourse={setEducationCourse}
             setIsEditingEducationArticle={setIsEditingEducationArticle}
+            handleSave={handleSave}
+            handleDelete={handleDelete}
           />
-          {/* Delete / Save buttons */}
-          <div className="button-container">
-            <button
-              className="delete"
-              type="button"
-              onClick={() => handleDelete()}
-              >
-              Delete
-            </button>
-            <button
-              className="save"
-              type="button"
-              onClick={(e) => handleSave(e)}
-              >
-              Save
-            </button>
-          </div>
         </>}
       </article>
   )

@@ -31,11 +31,11 @@ const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEd
   return (
     <article className="work-article">
       {!isEditingWorkArticle && <>
-        <section className="work-section">
-        <p>{workYear}</p>
-        <p>{workTitle}</p>
-        <p>{workCompany}</p>
-        </section>
+        <ul className="work-section">
+          <li>{workYear}</li>
+          <li>{workTitle}</li>
+          <li>{workCompany}</li>
+        </ul>
         <p>{workDescription}</p>
       </>}
 
@@ -62,26 +62,9 @@ const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEd
             workCompany={workCompany}
             setWorkCompany={setWorkCompany}
             setIsEditingWorkArticle={setIsEditingWorkArticle}
+            handleDelete={handleDelete}
+            handleSave={handleSave}
           />
-
-          <div className="button-container">
-            <button
-              className="delete"
-              type="button"
-              onClick={() => handleDelete()}
-              >
-              Delete
-            </button>
-            
-            <button
-              className="save"
-              type="button"
-              onClick={(e) => handleSave(e)}
-              >
-              Save
-            </button>
-          </div>
-          
         </>}
       </article>
   )
