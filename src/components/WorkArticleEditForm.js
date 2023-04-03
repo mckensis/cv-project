@@ -1,5 +1,3 @@
-import React from 'react'
-
 const WorkArticleEditForm = ({ 
   workYear, setWorkYear, workDescription, setWorkDescription,
   workTitle, setWorkTitle, workCompany, setWorkCompany }) => {
@@ -15,8 +13,9 @@ const WorkArticleEditForm = ({
           value={workYear}
           onChange={(e) => setWorkYear(e.target.value)}
           autoFocus
-          placeholder="Years from - to"
-          maxLength='20'
+          placeholder="Date from - to"
+          minLength="1"
+          maxLength="12"
         />
         {/* Job Title input */}
         <label htmlFor="job" tabIndex={-1}>Job Title</label>
@@ -27,6 +26,8 @@ const WorkArticleEditForm = ({
           value={workTitle}
           onChange={(e) => setWorkTitle(e.target.value)}
           placeholder="Job Title"
+          minLength="1"
+          maxLength="20"
           />
         {/* Company input */}
         <label htmlFor="company" tabIndex={-1}>Company</label>
@@ -34,6 +35,8 @@ const WorkArticleEditForm = ({
           type="text"
           name="company"
           id="company"
+          minLength="1"
+          maxLength="15"
           value={workCompany}
           onChange={(e) => setWorkCompany(e.target.value)}
           placeholder="Company Name"
@@ -46,6 +49,8 @@ const WorkArticleEditForm = ({
           value={workDescription}
           onChange={(e) => setWorkDescription(e.target.value)}
           placeholder="Description of the job"
+          minLength="1"
+          maxLength="500"
 
         >
         </textarea>

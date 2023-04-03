@@ -1,7 +1,7 @@
 import { useState } from "react";
 import WorkArticleEditForm from "./WorkArticleEditForm";
 
-const WorkArticle = ({ work, setWork, item, isEditing }) => {
+const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEditing, setCountEditing }) => {
   const { year, company, jobTitle, description } = item;
 
   const [isEditingWorkArticle, setIsEditingWorkArticle] = useState(false);
@@ -10,14 +10,22 @@ const WorkArticle = ({ work, setWork, item, isEditing }) => {
   const [workTitle, setWorkTitle] = useState(jobTitle);
   const [workDescription, setWorkDescription] = useState(description);
 
-  //Why is this deleting the wrong item
   const handleDelete = () => {
+    const count = countEditing - 1;
+    setCountEditing(count);
     setWork(work.filter(element => element.id !== item.id));
   }
 
+  const handleEditArticle = () => {
+    const count = countEditing + 1;
+    setIsEditingWorkArticle(true);
+    setCountEditing(count);
+  }
+
   const handleSave = (e) => {
-    e.preventDefault();
+    const count = countEditing - 1;
     setIsEditingWorkArticle(false);
+    setCountEditing(count);
   }
 
   return (
@@ -34,16 +42,16 @@ const WorkArticle = ({ work, setWork, item, isEditing }) => {
         {/* Delete button for each item */}
         {isEditing && !isEditingWorkArticle && <>
           <button
-            className="edit work-item"
+            className="edit"
             type="button"
-            onClick={() => setIsEditingWorkArticle(true)}
+            onClick={() => handleEditArticle()}
           >
             Edit
           </button>
-        </>
-        }
+        </>}
 
         {isEditing && isEditingWorkArticle && <>
+          
           <WorkArticleEditForm
             workYear={workYear}
             setWorkYear={setWorkYear}
@@ -55,20 +63,25 @@ const WorkArticle = ({ work, setWork, item, isEditing }) => {
             setWorkCompany={setWorkCompany}
             setIsEditingWorkArticle={setIsEditingWorkArticle}
           />
-          <button
-            className="save work-item"
-            type="button"
-            onClick={(e) => handleSave(e)}
-          >
-            Save
-          </button>
-          <button
-            className="delete work-item"
-            type="button"
-            onClick={() => handleDelete()}
-            >
-            Delete
-          </button>
+
+          <div className="button-container">
+            <button
+              className="delete"
+              type="button"
+              onClick={() => handleDelete()}
+              >
+              Delete
+            </button>
+            
+            <button
+              className="save"
+              type="button"
+              onClick={(e) => handleSave(e)}
+              >
+              Save
+            </button>
+          </div>
+          
         </>}
       </article>
   )
