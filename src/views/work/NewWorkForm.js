@@ -20,23 +20,23 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
       className="work-form"
       onSubmit={(e) => addNewWork(e)}
     >
-      <label htmlFor="year">Years</label>
+      <label htmlFor="year">Date</label>
       <input
         id="year"
         name="year"
         type="text"
-        placeholder="Date worked from - to"
+        placeholder="Date of Employment"
         value={year}
         onChange={(e) => setYear(e.target.value)}
         required
         autoFocus
       />
-      <label htmlFor="company">Company</label>
+      <label htmlFor="company">Company / Location</label>
       <input
         id="company"
         name="company"
         type="text"
-        placeholder="Company / Location"
+        placeholder="Company Name / Location"
         value={company}
         onChange={(e) => setCompany(e.target.value)}
         required
@@ -55,7 +55,7 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
         name="description"
         id="description"
         rows="3"
-        placeholder="Add a description of the job"
+        placeholder="Description of the Job"
         onChange={(e) => setDescription(e.target.value)}
         value={description}
       >

@@ -4,14 +4,20 @@
        url('../src/fonts//Calibri.woff') format('woff');
 }
 
+:root {
+  --primary-color: #456990;
+  --highlight-color: #efefef;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: default;
 }
 
-:root {
-  --blue: #456990;
+a:hover {
+  cursor: pointer;
 }
 
 body {
@@ -29,17 +35,9 @@ body {
 header {
   grid-column: 1 / -1;
   text-align: center;
-  background-color: darkgrey;
-  color: white;
-  width: 100%;
-}
-
-footer {
-  text-align: center;
-  background-color: darkgrey;
-  color: white;
-  position: fixed;
-  bottom: 0;
+  background-color: black;
+  color: lightgreen;
+  padding-top: 0.5rem;
   width: 100%;
 }
 
@@ -57,10 +55,11 @@ main {
 .personal,
 .work,
 .education,
-.about {
+.about,
+.skills,
+.projects {
   display: grid;
   position: relative;
-  gap: 0.5rem;
   align-content: start;
   grid-column: 1 / -1;
 }
@@ -69,13 +68,14 @@ h2 {
   font-size: 1.75rem;
   text-align: center;
   width: 100%;
-  background-color: var(--blue);
+  background-color: var(--primary-color);
   color: white;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.25rem;
   padding: 0.1rem;
   margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 h2.editing {
@@ -124,9 +124,23 @@ button.create {
   place-self: center;
 }
 
+button.cancel {
+  color: red;
+}
+
+button.submit {
+  color: green;
+}
+
 /* Edit education article button */
 button.edit.education-item {
   align-self: end;
+}
+
+section.personal button.mode {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Container for edit / save button */
@@ -139,43 +153,50 @@ button.edit.education-item {
   margin-top: 0.5rem;
 }
 
-section.personal button.mode {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+section.personal {
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.5rem;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 section.personal {
-  grid-template-columns: 1fr 45%;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 0;
+  text-align: right;
+  font-size: 1rem;
+  min-width: 0;
+  width: 100%;
 }
 
-section.personal,
 section.personal input {
   text-align: right;
   font-size: 1rem;
+  min-width: 0;
+  width: 100%;
 }
 
 section.personal p:first-of-type,
 section.personal input:first-of-type {
   font-size: 2rem;
-  width: 100%;
   font-weight: 600;
   grid-row: 1 / -1;
-  text-align: center;
-  place-self: center;
-  color: var(--blue);
+  text-align: left;
+  align-self: center;
+  margin-left: 0.5rem;
+  color: var(--primary-color);
 }
 
-section input {
+input {
   font-family: inherit;
   color: black;
   font-size: 0.9rem;
-  padding: 0rem;
+  padding: 0.5rem;
   border: none;
   outline: 1px solid #716A5C;
   box-shadow: 0 1px 2px #716A5C;
+}
+
+textarea {
+  font: inherit;
+  padding: 0.5rem;
 }
 
 /* All input labels */
@@ -189,8 +210,6 @@ label {
 .about textarea {
   width: 100%;
   height: 5rem;
-  font: inherit;
-  padding: 0.25rem;
 }
 
 .education-article {
@@ -216,35 +235,32 @@ label {
 
 .education-article ul :nth-child(3) {
   min-width: 100px;
+  text-align: right;
+}
+
+form {
+  margin-top: 0.5rem;
 }
 
 /* Add new education form */
 .education-form {
   display: flex;
-  row-gap: 0.5rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
 }
 
-.education-form input {
+.education-form > input {
   padding: 0.25rem 0;
   font-size: 0.9rem;
-}
-
-.education-form button:nth-of-type(1) {
-  margin-right: 0.25rem;
-  color: red;
-}
-.education-form button:nth-of-type(2) {
-  margin-left: 0.25rem;
-  color: green;
 }
 
 .education-item-edit-form {
   display: flex;
   flex-direction: column;
-  background-color: #efefef;
+  background-color: var(--highlight-color);
   padding: 0.5rem;
+  row-gap: 0.5rem;
 }
 
 .education-item-edit-form .form-container {
@@ -277,6 +293,19 @@ label {
   flex-basis: 125%;
 }
 
+.education-article button.edit {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+section.work {
+  row-gap: 0.25rem;
+}
+
+section.work > article:nth-of-type(odd) {
+  background-color: var(--highlight-color);
+}
+
 .work-article {
   position: relative;
   display: grid;
@@ -284,7 +313,6 @@ label {
   grid-template-rows: repeat(2, max-content);
   row-gap: 0.25rem;
   column-gap: 10px;
-  background-color: #efefef;
   padding: 0.25rem 0.75rem;
   min-height: 2.5rem;
 }
@@ -308,7 +336,7 @@ label {
 /* Add new work form */
 .work-form {
   display: flex;
-  row-gap: 0.5rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -316,23 +344,12 @@ label {
 .work-form textarea {
   flex-grow: 2;
   flex-basis: 100%;
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.5rem;
 }
 
 .work-form input {
-  padding: 0.25rem 0;
+  flex-grow: 1;
+  padding: 0.5rem;
   font-size: 0.9rem;
-}
-
-.work-form button:nth-of-type(1) {
-  margin-right: 0.25rem;
-  color: red;
-}
-.work-form button:nth-of-type(2) {
-  margin-left: 0.25rem;
-  color: green;
 }
 
 .work-item-edit-form {
@@ -340,7 +357,7 @@ label {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   flex-direction: column;
-  background-color: #efefef;
+  background-color: var(--highlight-color);
   padding: 0.5rem 0rem;
   justify-content: stretch;
 }
@@ -351,7 +368,7 @@ label {
   grid-template-rows: repeat(3, max-content);
   row-gap: 0.25rem;
   column-gap: 10px;
-  background-color: #efefef;
+  background-color: var(--highlight-color);
 }
 
 .work-item-edit-form input {
@@ -379,9 +396,67 @@ label {
 
 .work-item-edit-form textarea {
   height: 100%;
-  font-family: inherit;
-  font-size: 1rem;
   grid-column: 2;
   grid-row: 1 / -1;
-  border: none;
+}
+
+.skill-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.skill-list li {
+  min-width: max-content;
+}
+
+section.projects > article:nth-of-type(odd) {
+  background-color: var(--highlight-color);
+}
+
+.project-article {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+}
+
+.project-info {
+  flex-grow: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  text-align: right;
+  align-self: center;
+  min-width: max-content;
+}
+
+.project-article > p {
+  flex-basis: 100%;
+  padding: 0.25rem;
+}
+
+.project-article button.edit {
+  margin-left: auto;
+}
+
+.project-article .form-container,
+.project-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-item-edit-form,
+.project-form {
+  flex-basis: 100%;
+}
+
+.project-item-edit-form textarea,
+.project-form textarea {
+  flex-basis: 100%;
+  min-height: 6rem;
 }

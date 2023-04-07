@@ -11,7 +11,7 @@ const EducationArticleEditForm = ({
   }
 
   return (
-    <form className="education-item-edit-form" onSubmit={(e) => validateForm(e)}>
+    <form className="edit" onSubmit={(e) => validateForm(e)}>
       <section className="form-container">
       {/* Year input */}
         <label htmlFor="year" tabIndex={-1}>Date</label>
@@ -22,8 +22,8 @@ const EducationArticleEditForm = ({
           value={educationYear}
           onChange={(e) => setEducationYear(e.target.value)}
           autoFocus
-          placeholder="Year from - to"
-          maxLength="12"
+          placeholder="Date of Study"
+          maxLength="20"
           minLength="1"
           required
         />
@@ -35,9 +35,9 @@ const EducationArticleEditForm = ({
           id="location"
           value={educationLocation}
           minLength="1"
-          maxLength="25"
+          maxLength="36"
           onChange={(e) => setEducationLocation(e.target.value)}
-          placeholder="Location"
+          placeholder="Study Location"
           required
         />
         {/* Company input */}
@@ -47,10 +47,10 @@ const EducationArticleEditForm = ({
           name="course"
           id="course"
           minLength="1"
-          maxLength="25"
+          maxLength="20"
           value={educationCourse}
           onChange={(e) => setEducationCourse(e.target.value)}
-          placeholder="Course"
+          placeholder="Course / Grade"
           required
         />
         </section>
@@ -58,14 +58,14 @@ const EducationArticleEditForm = ({
         {/* Delete / Save buttons */}
         <section className="button-container">
           <button
-            className="delete"
+            className="delete cancel"
             type="button"
             onClick={() => handleDelete()}
           >
             Delete
           </button>
           <button
-            className="save"
+            className="save submit"
             type="submit"
           >
             Save

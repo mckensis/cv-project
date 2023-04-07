@@ -3,6 +3,8 @@ import Personal from "./views/Personal";
 import Work from "./views/work/Work";
 import About from "./views/About";
 import Education from "./views/education/Education";
+import Skills from "./views/Skills";
+import Projects from "./views/projects/Projects";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <main>
         <Personal />
         <About />
+        <Skills />
+        <Projects />
         <Work />
         <Education />
       </main>

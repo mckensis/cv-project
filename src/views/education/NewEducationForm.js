@@ -16,42 +16,49 @@ const NewEducationForm = ({ education, setEducation, setNewEducationFormVisible 
   
   return (
     <form
-      className="education-form"
+      className="new"
       onSubmit={(e) => addNewEducation(e)}
     >
-      <label htmlFor="year">Years</label>
-      <input
-        id="year"
-        name="year"
-        type="text"
-        placeholder="Date studied from - to"
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-        required
-        autoFocus
-      />
-      <label htmlFor="location">Location</label>
-      <input
-        id="location"
-        name="location"
-        type="text"
-        placeholder="Study Location"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        required
-      />
-      <label htmlFor="">Course / Grade</label>
-      <input
-        id="course"
-        name="course"
-        type="text"
-        placeholder="Course / Grade"
-        value={course}
-        onChange={(e) => setCourse(e.target.value)}
-        required
-      />
-      <button type="button" onClick={() => setNewEducationFormVisible(false)}>Cancel</button>
-      <button type="submit">Submit</button>
+      <section className="form-container">
+        <label htmlFor="year">Years</label>
+        <input
+          id="year"
+          name="year"
+          type="text"
+          placeholder="Date of Study"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          required
+          autoFocus
+          maxLength="20"
+          />
+        <label htmlFor="location">Location</label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          placeholder="Study Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          required
+          maxLength="36"
+          />
+        <label htmlFor="">Course / Grade</label>
+        <input
+          id="course"
+          name="course"
+          type="text"
+          placeholder="Course / Grade"
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
+          required
+          maxLength="20"
+          />
+      </section>
+      <section className="button-container">
+        <button className="cancel" type="button" onClick={() => setNewEducationFormVisible(false)}>Cancel</button>
+        <button className="submit" type="submit">Submit</button>
+      </section>
     </form>
   )
 }

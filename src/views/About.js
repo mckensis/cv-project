@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import '../About.css'
 
 const About = () => {
   const [sectionEnabled, setSectionEnabled] = useState(false);
@@ -35,7 +36,7 @@ const About = () => {
         {!isEditing && <p>{details}</p>}
 
         {/* Delete / Save buttons and textarea for updating the section */}
-        {isEditing ? <>
+        {isEditing && <>
 
           <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
           <button className="mode" onClick={() => handleSaveSection()}>Save</button>
@@ -53,7 +54,7 @@ const About = () => {
             >
             </textarea>
           </form>
-          </> : <></>
+          </>
         }
 
         {/* Edit section button */}

@@ -71,24 +71,21 @@ const Education = () => {
         {EducationArticles()}
 
         {/* Delete section button */}
-        {isEditing &&
+        {isEditing && <>
           <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
-        }
+          <button
+          className="mode"
+          onClick={() => handleSaveSection()}
+          disabled={countEditing === 0 ? null : true}
+          title={countEditing === 0 ? null : 'There are unsaved changes within this section'}
+          >
+            Save
+          </button>
+        </>}
 
         {/* Edit section button */}
         {isHovering && !isEditing &&
           <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
-        }
-
-        {/* Save section button */}
-        {isEditing &&
-          <button
-            className="mode"
-            onClick={() => handleSaveSection()}
-            disabled={countEditing === 0 ? null : true}
-          >
-            Save
-          </button>
         }
 
         {/* Add education history button */}
