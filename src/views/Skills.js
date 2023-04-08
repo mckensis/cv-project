@@ -72,7 +72,10 @@ const Skills = () => {
         }
 
         {/* Add work history form */}
-        {newSkillFormVisible && <p>Yass</p>
+        {newSkillFormVisible &&
+        <form action="">
+          
+        </form> 
         }
       </>}
 
