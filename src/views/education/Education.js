@@ -11,15 +11,15 @@ const Education = () => {
   const [education, setEducation] = useState([
     {
       id: uuid(),
-      year: '3000 - 3001',
-      location: 'A College',
-      course: 'Cooking up a storm'
+      year: '2020 - 2023',
+      location: 'The University',
+      course: 'The Course and The Grade'
     },
     {
       id: uuid(),
-      year: '1000 - 1999',
-      location: 'School of hard rocks xoxo',
-      course: '2 standard grades'
+      year: '2000 - 2005',
+      location: 'The School',
+      course: 'The Classes and The Grades'
     }
   ]);
 

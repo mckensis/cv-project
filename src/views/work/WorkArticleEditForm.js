@@ -4,7 +4,7 @@ const WorkArticleEditForm = ({
   workTitle, setWorkTitle, workCompany, setWorkCompany }) => {
 
     return (
-      <form className="work-item-edit-form" onSubmit={(e) => e.preventDefault()}>
+      <form className="edit" onSubmit={(e) => e.preventDefault()}>
         <section className="form-container">
         {/* Year input */}
         <label htmlFor="year" tabIndex={-1}>Date</label>

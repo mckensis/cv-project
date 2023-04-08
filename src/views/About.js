@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
-import '../About.css'
+import { useState } from "react";
 
 const About = () => {
-  const [sectionEnabled, setSectionEnabled] = useState(false);
+  const [sectionEnabled, setSectionEnabled] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [details, setDetails] = useState('I like the things.');
-
-  useEffect(() => {
-    if (details.length > 0) {
-      setSectionEnabled(true);
-    }
-  }, [details.length]);
+  const [details, setDetails] = useState(`This is where I'll put a small summary about myself. I'll make it concise and only include important information, such as how much I love working on my own but also as part of a team. I would also write something about how organised and friendly I am.`);
 
   const handleDeleteSection = () => {
     setSectionEnabled(false);

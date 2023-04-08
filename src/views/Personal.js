@@ -1,14 +1,13 @@
 import { useState } from "react";
-import '../Personal.css';
 
 const Personal = () => {
 
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [website, setWebsite] = useState('');
+  const [name, setName] = useState('Aidan Madeupsurname');
+  const [phoneNumber, setPhoneNumber] = useState('07890 123 456');
+  const [emailAddress, setEmailAddress] = useState('email@address.com');
+  const [website, setWebsite] = useState('https://example.com');
 
   const EditForm = () => {
     return <form onSubmit={(e) => e.preventDefault()}>
@@ -72,12 +71,12 @@ const Personal = () => {
       {!isEditing && <>
         <h3>{name ? name : 'Name Surname'}</h3>
         <ul>
-          <li className="contact">{phoneNumber ? phoneNumber : '07890 123 456'}</li>
+          <li className="contact">{phoneNumber ? phoneNumber : 'Phone Number'}</li>
           <li>
-            <a href={`mailto:${emailAddress}`} className="email">{emailAddress ? emailAddress : 'email@address.com'}</a>
+            {emailAddress ? <a href={`mailto:${emailAddress}`} className="email">{emailAddress}</a> : 'Email Address'}
           </li>
           <li>
-            <a href={website} className="website">{website ? website : 'https://www.website.com'}</a>
+            {website ? <a href={website} className="website">{website}</a> : 'Website URL'}
           </li>
         </ul>
       </>}

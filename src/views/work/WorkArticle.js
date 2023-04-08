@@ -31,7 +31,7 @@ const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEd
   return (
     <article className="work-article">
       {!isEditingWorkArticle && <>
-        <ul className="work-section">
+        <ul className="work-info">
           <li>{workYear}</li>
           <li>{workTitle}</li>
           <li>{workCompany}</li>

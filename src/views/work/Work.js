@@ -11,24 +11,17 @@ const Work = () => {
   const [work, setWork] = useState([
     {
       id: uuid(),
-      year: '3000 - 3001',
-      company: 'The Company',
+      year: '2014 - 2022',
+      company: 'Stonegate',
       jobTitle: 'Assistant Manager',
-      description: `Counted sheep, interviewed vampires, cleaned yer da, placed my feet up, other made up things, lemon, ginger, garlic, tofu, broccoli, eggs, milk, cows, sheep, pigs, horses, etc.`
+      description: `This would be a description of the role, such as daily duties and things that were a main focus. I would probably also include things such as following the company values, training, and teamwork.`
     },
     {
       id: uuid(),
-      year: '1000 - 1999',
-      company: 'A company',
-      jobTitle: 'A job role',
-      description: `Ate buffet food, made sandwiches, tickled your cat's toes, etc.`
-    },
-    {
-      id: uuid(),
-      year: '1000 - 1999',
-      company: 'A company',
-      jobTitle: 'A job role',
-      description: `Ate buffet food, made sandwiches, tickled your cat's toes, etc.`
+      year: '2012 - 2014',
+      company: `Mum's Farm`,
+      jobTitle: 'Egg Tester',
+      description: `A second job description.`
     },
   ]);
 

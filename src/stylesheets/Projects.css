@@ -1,0 +1,23 @@
+.project-article {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  row-gap: 0.25rem;
+}
+
+.project-info {
+  flex-grow: 1;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+  text-align: right;
+  align-self: center;
+}
+
+.project-article > p {
+  flex-basis: 100%;
+  font-style: italic;
+  text-align: justify;
+}

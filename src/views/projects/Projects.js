@@ -1,41 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NewProjectForm from "./NewProjectForm";
 import ProjectArticle from "./ProjectArticle";
 import { v4 as uuid } from "uuid";
 
 const Projects = () => {
-  const [sectionEnabled, setSectionEnabled] = useState(false);
+  const [sectionEnabled, setSectionEnabled] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newProjectFormVisible, setNewProjectFormVisible] = useState(false);
   const [projects, setProjects] = useState([
     {
       id: uuid(),
-      year: '3000 - 3001',
-      title: 'To-Do List',
-      description: `Did the thing to track the things and then also did that other thing with the things which in the end turned out to be a very good thing and then when that was done i checked that everything was aligned properly`,
-      url: 'https://mckensis.github.io/to-do-list',
-      github: 'https://github.com/mckensis/to-do-list'
+      year: '2022 - 2023',
+      title: 'Project One',
+      description: `This is where I will put a description of this project, making sure to include the frameworks and languages I used such as React and Jest. I would talk about the development process and the challenges I faced during development, and how I overcame them.`,
+      url: 'https://mckensis.github.io/',
+      github: 'https://github.com/mckensis/'
     },
     {
       id: uuid(),
-      year: '3000 - 3001',
-      title: 'To-Do List',
-      description: `Did the thing to track the things and then also did that other thing with the things which in the end turned out to be a very good thing and then when that was done i checked that everything was aligned properly`,
-      url: 'https://mckensis.github.io/to-do-list',
-      github: 'https://github.com/mckensis/to-do-list'
+      year: '2021',
+      title: 'Project Two',
+      description: `This is where I would put information about a second project.`,
+      url: 'https://mckensis.github.io/',
+      github: 'https://github.com/mckensis/'
     },
   ]);
 
   //Count how many entries in the section are currently in edit mode
   //Will help disable / enable the save section button
   const [countEditing, setCountEditing] = useState(0);
-
-  useEffect(() => {
-    if (projects.length > 0) {
-      setSectionEnabled(true);
-    }
-  }, [projects.length]);
 
   const handleDeleteSection = () => {
     setSectionEnabled(false);
@@ -62,7 +56,7 @@ const Projects = () => {
       />
     ))
   }
-
+  
   return (
     <section
       className="projects"

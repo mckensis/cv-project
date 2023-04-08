@@ -18,6 +18,7 @@
 .personal ul {
   list-style: none;
   grid-row: 1 / -1;
+  padding-right: 0.25rem;
 }
 
 .personal form {

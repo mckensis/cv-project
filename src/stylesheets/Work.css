@@ -1,0 +1,23 @@
+.work-article {
+  display: grid;
+  grid-template-columns: minmax(100px, min-content) 1fr;
+  grid-template-rows: repeat(2, max-content);
+  row-gap: 0.25rem;
+  column-gap: 1rem;
+}
+
+.work-article > p {
+  text-align: justify;
+  min-height: max-content;
+}
+
+ul.work-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+ul.work-info li:nth-of-type(1) {
+  font-weight: 600;
+}

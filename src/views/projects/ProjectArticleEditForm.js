@@ -71,7 +71,7 @@ const ProjectArticleEditForm = ({
           </section>
           <section className="button-container">
             <button
-              className="delete"
+              className="delete cancel"
               type="button"
               onClick={() => handleDelete()}
             >
@@ -79,7 +79,7 @@ const ProjectArticleEditForm = ({
             </button>
             
             <button
-              className="save"
+              className="save submit"
               type="button"
               onClick={(e) => handleSave(e)}
             >

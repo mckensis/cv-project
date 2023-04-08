@@ -36,10 +36,15 @@ const ProjectArticle = ({ projects, setProjects, project, isEditing, countEditin
           <h3>{projectTitle}</h3>
           <p>{projectYear}</p>
         </section>
-        <ul className="project-links">
-          <li><a href={projectUrl}>View live</a></li>
-          <li><a href={projectGithub}>View code</a></li>
-        </ul>
+        
+        {/* If either of the links exist, create elements for them */}
+        {(projectUrl || projectGithub) && 
+          <ul className="project-links">
+            {projectUrl ? <li><a href={projectUrl}>View live</a></li> : null}
+            {projectGithub ? <li><a href={projectGithub}>View code</a></li> : null}
+          </ul>
+        }
+
         <p>{projectDescription}</p>
       </>}
 

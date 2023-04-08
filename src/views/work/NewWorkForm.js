@@ -20,48 +20,52 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
       className="work-form"
       onSubmit={(e) => addNewWork(e)}
     >
-      <label htmlFor="year">Date</label>
-      <input
-        id="year"
-        name="year"
-        type="text"
-        placeholder="Date of Employment"
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-        required
-        autoFocus
-      />
-      <label htmlFor="company">Company / Location</label>
-      <input
-        id="company"
-        name="company"
-        type="text"
-        placeholder="Company Name / Location"
-        value={company}
-        onChange={(e) => setCompany(e.target.value)}
-        required
-      />
-      <label htmlFor="job">Job Title</label>
-      <input
-        id="job"
-        name="job"
-        type="text"
-        placeholder="Job Title"
-        value={jobTitle}
-        onChange={(e) => setJobTitle(e.target.value)}
-        required
-      />
-      <textarea
-        name="description"
-        id="description"
-        rows="3"
-        placeholder="Description of the Job"
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
-      >
-      </textarea>
-      <button type="button" onClick={() => setNewWorkFormVisible(false)}>Cancel</button>
-      <button type="submit">Submit</button>
+      <section className="form-container">
+        <label htmlFor="year">Date</label>
+        <input
+          id="year"
+          name="year"
+          type="text"
+          placeholder="Date of Employment"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+          required
+          autoFocus
+          />
+        <label htmlFor="company">Company / Location</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          placeholder="Company Name / Location"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          required
+        />
+        <label htmlFor="job">Job Title</label>
+        <input
+          id="job"
+          name="job"
+          type="text"
+          placeholder="Job Title"
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
+          required
+        />
+        <textarea
+          name="description"
+          id="description"
+          rows="3"
+          placeholder="Description of the Job"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          >
+        </textarea>
+      </section>
+      <section className="button-container">
+        <button className="cancel" type="button" onClick={() => setNewWorkFormVisible(false)}>Cancel</button>
+        <button className="submit" type="submit">Submit</button>
+      </section>
     </form>
   )
 }

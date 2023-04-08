@@ -1,0 +1,18 @@
+.skill-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.5rem;
+  text-align: center;
+}
+
+.skill-list li {
+  flex-basis: calc(100% / 3);
+  min-width: max-content;
+}
+
+.skills button.create {
+  margin-top: 0.5rem;
+}
