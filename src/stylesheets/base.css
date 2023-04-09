@@ -27,7 +27,7 @@ textarea {
 }
 
 body {
-  background-color: papayawhip;
+  background-color: #7A918D;
 }
 
 .App {
@@ -70,6 +70,7 @@ main {
   box-shadow: 1px 1px 20px rgba(0,0,0,0.7);
   overflow-y: auto;
   margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 .personal,
@@ -142,6 +143,22 @@ input {
   box-shadow: 0 1px 2px #716A5C;
 }
 
+input[type="color"] {
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  outline: none;
+  border: 1px solid black;
+  box-shadow: none;
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  display: none;
+}
+
 textarea {
   font: inherit;
   font-size: 1rem;
@@ -158,8 +175,22 @@ label {
   left: 0;
 }
 
+label.visible {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: unset;
+  opacity: unset;
+  top: unset;
+  left: unset;
+}
+
 ul {
   list-style: none;
+}
+
+a {
+  color: black;
 }
 
 button {
@@ -233,6 +264,11 @@ section:not(section.education) > article:nth-of-type(odd){
 
 section > article {
   padding: 0.5rem;
+}
+
+section > article:nth-last-of-type(1) {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .tooltip {

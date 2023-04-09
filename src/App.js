@@ -23,18 +23,28 @@ function App() {
   const [educationSectionEnabled, setEducationSectionEnabled] = useState(false);
   const mainRef = useRef();
 
+  const ChangeColor = (color) => {
+    document.documentElement.style.setProperty('--primary-color', 'red');
+  }
+
   return (
     <div className="App">
       <Header main={mainRef} />
       <main id="main" ref={mainRef}>
-        {/* Buttons to enable various sections */}
         <Personal />
+
+        {/* Buttons to enable various sections */}
         {!aboutSectionEnabled && <button className="add" onClick={() => setAboutSectionEnabled(true)}>Add About Section</button>}
         {!skillsSectionEnabled && <button className="add" onClick={() => setSkillsSectionEnabled(true)}>Add Key Skills Section</button>}
         {!projectsSectionEnabled && <button className="add" onClick={() => setProjectsSectionEnabled(true)}>Add Projects Section</button>}
         {!workSectionEnabled && <button className="add" onClick={() => setWorkSectionEnabled(true)}>Add Work Section</button>}
         {!educationSectionEnabled && <button className="add" onClick={() => setEducationSectionEnabled(true)}>Add Education Section</button>}
         
+        {/* Color picker */}
+        <label className="visible" htmlFor="primary">Main Color
+          <input id="primary" type="color" onChange={(e) => ChangeColor(e.target.value)}/>
+        </label>
+
         {aboutSectionEnabled && <About />}
         {skillsSectionEnabled && <Skills />}
         {projectsSectionEnabled && <Projects />}
