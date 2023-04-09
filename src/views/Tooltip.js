@@ -29,11 +29,11 @@ const Tooltip = () => {
         <h4>Tips</h4>
         <ul>
           <li>Hover over any section to show that section's edit button</li>
-          <li>While in edit mode you can edit or delete a section</li>
-          <li>You cannot save a section if there is an unsaved edit</li>
-          <li>A deleted section will be removed from the printed version</li>
+          <li>While editing a section you can delete it or change the content</li>
+          <li>You cannot save some sections if there are any unsaved edits</li>
+          <li>You can delete unwanted or irrelevant sections</li>
           <li>You can omit any input fields that you don't need</li>
-          <li>Buttons, scrollbars, and forms will not show up when printing</li>
+          <li>Buttons, scrollbars, and deleted sections will not show up when printing</li>
         </ul>
         <h4>For Best Results</h4>
         <ul>

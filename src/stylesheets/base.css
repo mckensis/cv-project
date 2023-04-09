@@ -200,6 +200,10 @@ button {
   width: 4rem;
 }
 
+button:hover {
+  background-color: #CDD7D6;
+}
+
 /* Edit / Save mode button */
 button.mode {
   position: absolute;
