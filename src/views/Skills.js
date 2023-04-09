@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
+import EditSkillsForm from "./skills/EditSkillsForm";
 
 const Skills = ({ setSkillsSectionEnabled }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [newSkill, setNewSkill] = useState('');
   const [skills, setSkills] = useState(
     JSON.parse(localStorage.getItem('skills'))
     || [
@@ -34,31 +34,9 @@ const Skills = ({ setSkillsSectionEnabled }) => {
     }
   ]);
 
-  const handleDeleteSection = () => {
-    setSkills([]);
-    setSkillsSectionEnabled(false);
-  }
-
-  const handleSaveSection = () => {
-    setIsEditing(false);
-    localStorage.setItem('skills', JSON.stringify(skills));
-  }
-  
-  const handleAddSkill = (description) => {
-    if (!description) return;
-
-    const newSkill = { id: uuid(), skill: description };
-    setSkills([...skills, newSkill]);
-    localStorage.setItem('skills', JSON.stringify(skills));
-  }
-  
   const handleEditSkill = (e, index) => {
     skills[index] = e.target.value;
     setSkills(skills.filter(item => item !== ''));
-  }
-
-  const SkillList = () => {
-    return <ul className="skill-list">{SkillItems()}</ul>
   }
 
   const SkillItems = () => {
@@ -71,27 +49,10 @@ const Skills = ({ setSkillsSectionEnabled }) => {
           id={item.id}
           maxLength="20"
           value={item.skill}
+          placeholder="Skill"
           onChange={(e) => handleEditSkill(e, index)}
         />
     ));
-  }
-
-  const EditForm = () => {
-    return (
-      <>
-      <form className="skills edit" onSubmit={(e) => e.preventDefault()}>
-        <section className="form-container">
-          {SkillItems()}
-        </section>
-        <section className="button-container">
-          <input className="new" type="text" value={newSkill} maxLength="20" onChange={(e) => setNewSkill(e.target.value)} />
-          <button type="button" className="add" onClick={(e) => handleAddSkill(newSkill)}>Add Skill</button>
-        </section>
-      </form>
-      <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
-      <button className="mode" onClick={() => handleSaveSection()}>Save</button>
-      </>
-    )
   }
 
   return (
@@ -101,21 +62,25 @@ const Skills = ({ setSkillsSectionEnabled }) => {
       onMouseOut={() => setIsHovering(false)}
     >
       <h2 className={isEditing ? "editing" : null}>Key Skills</h2>
-        
-        {/* List of skills */}
-        {!isEditing &&
-          SkillList()
-        }
 
-        {/* Edit Skills Form */}
-        {isEditing && <>
-          {EditForm()}
-        </>}
+      {/* List of skills */}
+      {!isEditing && <ul className="skill-list">{SkillItems()}</ul>}
 
-        {/* Edit */}
-        {isHovering && !isEditing &&
-          <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
-        }
+      {/* Edit Skills Form */}
+      {isEditing &&
+        <EditSkillsForm
+          skills={skills}
+          setSkills={setSkills}
+          SkillItems={SkillItems}
+          setIsEditing={setIsEditing}
+          setSkillsSectionEnabled={setSkillsSectionEnabled}
+        />
+      }
+
+      {/* Edit Section Button */}
+      {isHovering && !isEditing &&
+        <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
+      }
     </section>
   )
 }

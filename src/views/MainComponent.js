@@ -41,13 +41,6 @@ const MainComponent = () => {
         <Education />}
     </main>
   )
-
-
-
-
-  return (
-    <div>MainComponent</div>
-  )
 }
 
 export default MainComponent;
