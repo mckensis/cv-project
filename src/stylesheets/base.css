@@ -126,7 +126,7 @@ form.edit .form-container {
   flex-direction: column;
 }
 
-form input:nth-of-type(1) {
+form input:nth-of-type(1):not(.skills input) {
   font-weight: 600;
 }
 

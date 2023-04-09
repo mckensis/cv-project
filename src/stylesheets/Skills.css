@@ -16,3 +16,28 @@
 .skills button.create {
   margin-top: 0.5rem;
 }
+
+form.skills.edit {
+  grid-row: unset;
+}
+
+form.skills.edit .form-container {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+form.skills.edit .form-container input {
+  flex-basis: calc(100% / 3);
+}
+
+input.new {
+  margin-top: 1rem;
+  margin-right: 0.5rem;;
+  flex-basis: calc(100% / 2);
+}
+
+form.skills.edit button.add {
+  align-self: stretch;
+  margin-top: 1rem;
+}

@@ -1,37 +1,97 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-const Skills = () => {
-  const [sectionEnabled, setSectionEnabled] = useState(true);
+const Skills = ({ setSkillsSectionEnabled }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [newSkillFormVisible, setNewSkillFormVisible] = useState(false);
-  const [countEditing, setCountEditing] = useState(0);
-  const [skills, setSkills] = useState([
-    'Smart Thinker',
-    'Strong Lifter',
-    'Fast Runner',
-    'Slow Crawler',
-    'High Jumper',
-    'Quick Swimmer',
+  const [newSkill, setNewSkill] = useState('');
+  const [skills, setSkills] = useState(
+    JSON.parse(localStorage.getItem('skills'))
+    || [
+    {
+      id: uuid(),
+      skill: 'Smart Thinker'
+    },
+    {
+      id: uuid(),
+      skill: 'Strong Lifter'
+    },
+    {
+      id: uuid(),
+      skill: 'Fast Runner'
+    },
+    {
+      id: uuid(),
+      skill: 'Slow Crawler'
+    },
+    {
+      id: uuid(),
+      skill: 'High Jumper'
+    },
+    {
+      id: uuid(),
+      skill: 'Quick Swimmer'
+    }
   ]);
 
   const handleDeleteSection = () => {
-    setSectionEnabled(false);
     setSkills([]);
+    setSkillsSectionEnabled(false);
   }
 
   const handleSaveSection = () => {
     setIsEditing(false);
-    setNewSkillFormVisible(false);
+    localStorage.setItem('skills', JSON.stringify(skills));
+  }
+  
+  const handleAddSkill = (description) => {
+    if (!description) return;
+
+    const newSkill = { id: uuid(), skill: description };
+    setSkills([...skills, newSkill]);
+    localStorage.setItem('skills', JSON.stringify(skills));
+  }
+  
+  const handleEditSkill = (e, index) => {
+    skills[index] = e.target.value;
+    setSkills(skills.filter(item => item !== ''));
+  }
+
+  const SkillList = () => {
+    return <ul className="skill-list">{SkillItems()}</ul>
   }
 
   const SkillItems = () => {
-    return skills.length > 0 && skills.map((item) => (
-      <li key={uuid()}>
-        {item}
-      </li>
+    return skills.length > 0 && skills.map((item, index) => (
+      !isEditing ?
+        <li key={item.id}>{item.skill}</li>
+      : <input
+          key={item.id}
+          type="text"
+          id={item.id}
+          maxLength="20"
+          value={item.skill}
+          onChange={(e) => handleEditSkill(e, index)}
+        />
     ));
+  }
+
+  const EditForm = () => {
+    return (
+      <>
+      <form className="skills edit" onSubmit={(e) => e.preventDefault()}>
+        <section className="form-container">
+          {SkillItems()}
+        </section>
+        <section className="button-container">
+          <input className="new" type="text" value={newSkill} maxLength="20" onChange={(e) => setNewSkill(e.target.value)} />
+          <button type="button" className="add" onClick={(e) => handleAddSkill(newSkill)}>Add Skill</button>
+        </section>
+      </form>
+      <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
+      <button className="mode" onClick={() => handleSaveSection()}>Save</button>
+      </>
+    )
   }
 
   return (
@@ -40,49 +100,22 @@ const Skills = () => {
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
     >
-      {sectionEnabled && <>
-        <h2 className={isEditing ? "editing" : null}>Key Skills</h2>
+      <h2 className={isEditing ? "editing" : null}>Key Skills</h2>
         
         {/* List of skills */}
-        <ul className="skill-list">
-          {SkillItems()}
-        </ul>
-
-        {/* Delete section button */}
-        {isEditing &&
-          <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
+        {!isEditing &&
+          SkillList()
         }
 
-        {/* Edit section button */}
+        {/* Edit Skills Form */}
+        {isEditing && <>
+          {EditForm()}
+        </>}
+
+        {/* Edit */}
         {isHovering && !isEditing &&
           <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
         }
-
-        {/* Save section button */}
-        {isEditing ?
-          countEditing === 0 ?
-          <button className="mode" onClick={() => handleSaveSection()}>Save</button>
-          : <button className="mode" disabled title="Save or delete any section entries currently in edit mode to save.">Save</button>
-          : null
-        }
-
-        {/* Add work history button */}
-        {isEditing && !newSkillFormVisible &&
-          <button className="create" onClick={() => setNewSkillFormVisible(true)}>Add New Skill</button>
-        }
-
-        {/* Add work history form */}
-        {newSkillFormVisible &&
-        <form action="">
-          
-        </form> 
-        }
-      </>}
-
-
-      {!sectionEnabled && <>
-        <button className="add" onClick={() => setSectionEnabled(true)}>Add Skill Summary Section</button>      
-      </>}
     </section>
   )
 }

@@ -7,13 +7,12 @@ import Work from "./work/Work";
 import { useState } from "react";
 
 const MainComponent = () => {
-
   // States for controlling visibility of sections or a button to show the section
-  const [aboutSectionEnabled, setAboutSectionEnabled] = useState(false);
-  const [skillsSectionEnabled, setSkillsSectionEnabled] = useState(false);
-  const [projectsSectionEnabled, setProjectsSectionEnabled] = useState(false);
-  const [workSectionEnabled, setWorkSectionEnabled] = useState(false);
-  const [educationSectionEnabled, setEducationSectionEnabled] = useState(false);
+  const [aboutSectionEnabled, setAboutSectionEnabled] = useState(true);
+  const [skillsSectionEnabled, setSkillsSectionEnabled] = useState(true);
+  const [projectsSectionEnabled, setProjectsSectionEnabled] = useState(true);
+  const [workSectionEnabled, setWorkSectionEnabled] = useState(true);
+  const [educationSectionEnabled, setEducationSectionEnabled] = useState(true);
 
   return (
     <main id="main">
