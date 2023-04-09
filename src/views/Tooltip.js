@@ -16,12 +16,10 @@ const Tooltip = () => {
 
   return (
     <div className="header-icon">
-    {!isHovering &&
       <BsQuestionCircle
       onMouseEnter={(e) => handleHover(e, true)}
       onMouseLeave={(e) => handleHover(e, false)}
       />
-    }
 
     {isHovering && 
       <div className="tooltip" 
