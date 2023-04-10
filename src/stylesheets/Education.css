@@ -1,7 +1,7 @@
 .education-article {
-  margin-bottom: 0;
   display: flex;
   flex-direction: column;
+  row-gap: 0.25rem;
 }
 
 .education-article ul {
@@ -11,7 +11,7 @@
 }
 
 .education-article ul :nth-child(1) {
-  font-weight: 600;
+  min-width: 130px;
 }
 
 .education-article ul :nth-child(2) {
@@ -21,8 +21,4 @@
 .education-article ul :nth-child(3) {
   min-width: max-content;
   text-align: right;
-}
-
-.education-article button.edit {
-  margin-top: 0.25rem;
 }

@@ -15,9 +15,9 @@ const WorkArticle = ({ workSingular, work, setWork, isEditing, countEditing, set
       {!isEditingWorkArticle && <>
         {(workSingular['year'] || workSingular['title'] || workSingular['company']) &&
           <ul className={workSingular['description'] ? "work-info" : "work-info condensed"}>
-            {workSingular['year'] && <li className="secondary">{workSingular['year']}</li>}
             {workSingular['title'] && <li className="primary">{workSingular['title']}</li>}
             {workSingular['company'] && <li>{workSingular['company']}</li>}
+            {workSingular['year'] && <li>{workSingular['year']}</li>}
           </ul>
         }
 

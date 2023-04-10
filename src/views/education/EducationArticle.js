@@ -15,7 +15,7 @@ const EducationArticle = ({ educationSingular, education, setEducation, isEditin
       {!isEditingEducationArticle && <>
         {(educationSingular['year'] || educationSingular['location'] || educationSingular['course']) &&
           <ul>
-            {educationSingular['year'] && <li>{educationSingular['year']}</li>}
+            {educationSingular['year'] && <li className="primary">{educationSingular['year']}</li>}
             {educationSingular['location'] && <li>{educationSingular['location']}</li>}
             {educationSingular['course'] && <li>{educationSingular['course']}</li>}
           </ul>

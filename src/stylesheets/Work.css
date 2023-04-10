@@ -1,6 +1,6 @@
 .work-article {
   display: grid;
-  grid-template-columns: minmax(100px, min-content) 1fr;
+  grid-template-columns: minmax(130px, min-content) 1fr;
   row-gap: 0.75rem;
   column-gap: 1rem;
 }
@@ -25,13 +25,26 @@ ul.work-info {
 ul.work-info.condensed {
   flex-direction: row;
   grid-column: 1 / -1;
-  justify-content: center;
-  place-self: center;
+  justify-content: start;
   gap: 2rem;
 }
 
 ul.work-info.condensed li {
+  min-width: 10rem;
+}
+
+
+ul.work-info.condensed li:nth-last-of-type(2) {
   flex-grow: 1;
+}
+
+ul.work-info.condensed li:nth-last-of-type(1):not(.primary) {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.work li.primary {
+  text-align: left;
 }
 
 .work button.create {

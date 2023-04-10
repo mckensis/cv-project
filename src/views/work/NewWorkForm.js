@@ -33,19 +33,21 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
       <section className="form-container">
         <label htmlFor="title" tabIndex={-1}>Job Title</label>
         <input
+          autoFocus
           id="title"
           name="title"
           type="text"
+          maxLength="30"
           placeholder="Job Title"
           value={newWork['title']}
           onChange={(e) => setNewWork({...newWork, title: e.target.value})}
-          autoFocus
         />
         <label htmlFor="company" tabIndex={-1}>Company / Location</label>
         <input
           id="company"
           name="company"
           type="text"
+          maxLength="30"
           placeholder="Company Name / Location"
           value={newWork['company']}
           onChange={(e) => setNewWork({...newWork, company: e.target.value})}
@@ -55,6 +57,7 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
           id="year"
           name="year"
           type="text"
+          maxLength="20"
           placeholder="Date of Employment"
           value={newWork['year']}
           onChange={(e) => setNewWork({...newWork, year: e.target.value})}
@@ -63,6 +66,7 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
         <textarea
           name="description"
           id="description"
+          maxLength="400"
           placeholder="Description of the Job"
           value={newWork['description']}
           onChange={(e) => setNewWork({...newWork, description: e.target.value})}

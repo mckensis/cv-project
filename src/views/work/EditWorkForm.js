@@ -45,43 +45,43 @@ const EditWorkForm = ({
       <section className="form-container">
         <label htmlFor="job" tabIndex={-1}>Job Title</label>
         <input
+          autoFocus
           type="text"
           name="job"
           id="job"
+          maxLength="30"
+          placeholder="Job Title"
           value={tempWork['title']}
           onChange={(e) => setTempWork({...tempWork, title: e.target.value})}
-          placeholder="Job Title"
-          maxLength="20"
-          autoFocus
         />
         <label htmlFor="company" tabIndex={-1}>Company</label>
         <input
           type="text"
           name="company"
           id="company"
-          maxLength="15"
+          maxLength="30"
+          placeholder="Company Name"
           value={tempWork['company']}
           onChange={(e) => setTempWork({...tempWork, company: e.target.value})}
-          placeholder="Company Name"
         />
         <label htmlFor="year" tabIndex={-1}>Date</label>
         <input
           type="text"
           name="year"
           id="year"
+          maxLength="20"
+          placeholder="Date of Employment"
           value={tempWork['year']}
           onChange={(e) => setTempWork({...tempWork, year: e.target.value})}
-          placeholder="Date of Employment"
-          maxLength="12"
         />
         <label htmlFor="description" tabIndex={-1}>Description</label>
         <textarea
           name="description"
           id="description"
+          maxLength="400"  
           value={tempWork['description']}
           onChange={(e) => setTempWork({...tempWork, description: e.target.value})}
           placeholder="Description of the Job"
-          maxLength="500"  
         >
         </textarea>
       </section>

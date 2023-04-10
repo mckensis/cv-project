@@ -82,6 +82,7 @@ main {
   display: grid;
   position: relative;
   grid-auto-rows: max-content;
+  gap: 0.5rem;
 }
 
 h2 {
@@ -95,7 +96,6 @@ h2 {
   letter-spacing: 0.25rem;
   padding: 0.1rem;
   margin-top: 0.75rem;
-  margin-bottom: 0.5rem;
 }
 
 h2.editing {
@@ -179,16 +179,6 @@ label {
   opacity: 0;
   top: 0;
   left: 0;
-}
-
-label.visible {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: unset;
-  opacity: unset;
-  top: unset;
-  left: unset;
 }
 
 ul {
@@ -280,9 +270,12 @@ button.print {
   font-style: italic;
 }
 
-
 section:not(section.education) > article:nth-of-type(odd){
   background-color: var(--highlight-color);
+}
+
+section:not(section.education) > article:nth-of-type(even){
+  background-color: lightgrey;
 }
 
 section > article {

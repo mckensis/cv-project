@@ -1,7 +1,6 @@
 .project-article {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 0.5rem;
   row-gap: 0.25rem;
 }
 
