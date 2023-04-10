@@ -1,19 +1,8 @@
 import { useState } from 'react';
-import EducationArticleEditForm from './EducationArticleEditForm';
+import EditEducationForm from './EditEducationForm';
 
-const EducationArticle = ({ education, setEducation, item, isEditing, countEditing, setCountEditing }) => {
-  const { year, location, course } = item;
-
+const EducationArticle = ({ educationSingular, education, setEducation, isEditing, countEditing, setCountEditing }) => {
   const [isEditingEducationArticle, setIsEditingEducationArticle] = useState(false);
-  const [educationYear, setEducationYear] = useState(year);
-  const [educationLocation, setEducationLocation] = useState(location);
-  const [educationCourse, setEducationCourse] = useState(course);
-  
-  const handleDelete = () => {
-    const count = countEditing - 1;
-    setCountEditing(count);
-    setEducation(education.filter(element => element.id !== item.id));
-  }
 
   const handleEdit = () => {
     const count = countEditing + 1;
@@ -21,45 +10,33 @@ const EducationArticle = ({ education, setEducation, item, isEditing, countEditi
     setCountEditing(count);
   }
 
-  const handleSave = () => {
-    const count = countEditing - 1;
-    setIsEditingEducationArticle(false);
-    setCountEditing(count);
-  }
-
   return (
-      <article className="education-article">
-      {!isEditingEducationArticle && <ul>
-        <li>{educationYear}</li>
-        <li>{educationLocation}</li>
-        <li>{educationCourse}</li>
-      </ul>}
+    <article className="education-article">
+      {!isEditingEducationArticle && <>
+        {(educationSingular['year'] || educationSingular['location'] || educationSingular['course']) &&
+          <ul>
+            {educationSingular['year'] && <li>{educationSingular['year']}</li>}
+            {educationSingular['location'] && <li>{educationSingular['location']}</li>}
+            {educationSingular['course'] && <li>{educationSingular['course']}</li>}
+          </ul>
+        }
+        {isEditing &&
+          <button className="edit" type="button" onClick={() => handleEdit()}>Edit</button>
+        }
+      </>}
 
-        {/* Delete button for each item */}
-        {isEditing && !isEditingEducationArticle && <>
-          <button
-            className="edit education-item"
-            type="button"
-            onClick={() => handleEdit()}
-          >
-            Edit
-          </button>
-        </>}
-        {/* Form for editing the entry */}
-        {isEditing && isEditingEducationArticle && <>
-          <EducationArticleEditForm
-            educationYear={educationYear}
-            setEducationYear={setEducationYear}
-            educationLocation={educationLocation}
-            setEducationLocation={setEducationLocation}
-            educationCourse={educationCourse}
-            setEducationCourse={setEducationCourse}
-            setIsEditingEducationArticle={setIsEditingEducationArticle}
-            handleSave={handleSave}
-            handleDelete={handleDelete}
-          />
-        </>}
-      </article>
+      {/* Form for editing the entry */}
+      {isEditingEducationArticle && isEditing && <>
+        <EditEducationForm
+          educationSingular={educationSingular}
+          education={education}
+          setEducation={setEducation}
+          countEditing={countEditing}
+          setCountEditing={setCountEditing}
+          setIsEditingEducationArticle={setIsEditingEducationArticle}
+        />
+      </>}
+    </article>
   )
 }
 

@@ -28,7 +28,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
 
   return (
     <form
-      className="project-form"
+      className="new"
       onSubmit={(e) => addNewProject(e)}
     >
       <label htmlFor="title" tabIndex={-1}>Project Title</label>

@@ -1,58 +1,65 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
+import checkPopulated from "../../checkPopulated";
 
 const NewEducationForm = ({ education, setEducation, setNewEducationFormVisible }) => {
   
-  const [year, setYear] = useState('');
-  const [location, setLocation] = useState('');
-  const [course, setCourse] = useState('');
+  const [newEducation, setNewEducation] = useState({
+    id: uuid(),
+    year: '',
+    location: '',
+    course: ''
+  });
 
   const addNewEducation = (e) => {
-    const newEducation = { year, location, course, id: uuid() };
+    e.preventDefault();
+
+    if (!checkPopulated(newEducation)) {
+      return;
+    }
+
     const updatedEducation = [...education, newEducation];
     setEducation(updatedEducation);
+    localStorage.setItem('education', JSON.stringify(updatedEducation));
     setNewEducationFormVisible(false);
   }
   
   return (
-    <form
-      className="new"
-      onSubmit={(e) => addNewEducation(e)}
-    >
+    <form className="new" onSubmit={(e) => addNewEducation(e)}>
       <section className="form-container">
-        <label htmlFor="year">Years</label>
+        <label htmlFor="year" tabIndex={-1}>Years</label>
         <input
+          autoFocus
+          required
           id="year"
           name="year"
           type="text"
-          placeholder="Date of Study"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          required
-          autoFocus
           maxLength="20"
+          placeholder="Date of Study"
+          value={newEducation['year']}
+          onChange={(e) => setNewEducation({...newEducation, year: e.target.value})}
           />
-        <label htmlFor="location">Location</label>
+        <label htmlFor="location" tabIndex={-1}>Location</label>
         <input
+          required
           id="location"
           name="location"
           type="text"
+          maxLength="30"
           placeholder="Study Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          required
-          maxLength="36"
+          value={newEducation['location']}
+          onChange={(e) => setNewEducation({...newEducation, location: e.target.value})}
           />
-        <label htmlFor="">Course / Grade</label>
+        <label htmlFor="course" tabIndex={-1}>Course / Grade</label>
         <input
+          required
           id="course"
           name="course"
           type="text"
+          maxLength="50"
           placeholder="Course / Grade"
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-          required
-          maxLength="20"
+          value={newEducation['course']}
+          onChange={(e) => setNewEducation({...newEducation, course: e.target.value})}
           />
       </section>
       <section className="button-container">

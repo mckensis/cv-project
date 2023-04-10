@@ -7,7 +7,9 @@ const Education = ({ setEducationSectionEnabled }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newEducationFormVisible, setNewEducationFormVisible] = useState(false);
-  const [education, setEducation] = useState([
+  const [education, setEducation] = useState(
+    JSON.parse(localStorage.getItem('education'))
+    || [
     {
       id: uuid(),
       year: '2020 - 2023',
@@ -28,7 +30,6 @@ const Education = ({ setEducationSectionEnabled }) => {
 
   const handleDeleteSection = () => {
     setEducationSectionEnabled(false);
-    setEducation([]);
   }
 
   const handleSaveSection = () => {
@@ -36,62 +37,53 @@ const Education = ({ setEducationSectionEnabled }) => {
     setNewEducationFormVisible(false);
   }
 
+  const handleDisplayForm = () => {
+    setCountEditing(0);
+    setNewEducationFormVisible(true);
+  }
+
   const EducationArticles = () => {
     return education.length > 0 && education.map((item) => (
       <EducationArticle
         key={item.id}
+        educationSingular={item}
         education={education}
         setEducation={setEducation}
         isEditing={isEditing}
         countEditing={countEditing}
         setCountEditing={setCountEditing}
-        item={item}/>
+      />
     ))
   }
 
   return (
-    <section
-      className="education"
-      onMouseOver={() => setIsHovering(true)}
-      onMouseOut={() => setIsHovering(false)}
-    >
-
-      {/* Heading */}
+    <section className="education" onMouseOver={() => setIsHovering(true)} onMouseOut={() => setIsHovering(false)}>
       <h2 className={isEditing ? "editing" : null}>Education</h2>
 
       {/* Education Articles if there is any education to display */}
-      {EducationArticles()}
+      {!newEducationFormVisible && EducationArticles()}
 
-      {/* Delete section button */}
       {isEditing && <>
         <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
-        <button
-        className="mode"
-        onClick={() => handleSaveSection()}
-        disabled={countEditing === 0 ? null : true}
-        title={countEditing === 0 ? null : 'There are unsaved changes within this section'}
-        >
-          Save
-        </button>
+        <button className="mode" onClick={() => handleSaveSection()} disabled={countEditing === 0 ? null : true} title={countEditing === 0 ? null : 'There are unsaved changes within this section'}>Save</button>
+
+        {!newEducationFormVisible &&
+          <button className="create" onClick={() => handleDisplayForm()}>Add New Education</button>
+        }
+
+        {/* Add education history form */}
+        {newEducationFormVisible && 
+          <NewEducationForm
+            education={education}
+            setEducation={setEducation}
+            setNewEducationFormVisible={setNewEducationFormVisible}
+          />
+        }
       </>}
 
       {/* Edit section button */}
       {isHovering && !isEditing &&
         <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
-      }
-
-      {/* Add education history button */}
-      {isEditing && !newEducationFormVisible &&
-        <button className="create" onClick={() => setNewEducationFormVisible(true)}>Add New Education</button>
-      }
-      
-      {/* Add education history form */}
-      {newEducationFormVisible && 
-        <NewEducationForm
-          education={education}
-          setNewEducationFormVisible={setNewEducationFormVisible}
-          setEducation={setEducation}
-        />
       }
     </section>
   )

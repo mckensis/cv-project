@@ -32,6 +32,11 @@ const Projects = ({ setProjectsSectionEnabled }) => {
   //Will help disable / enable the save section button
   const [countEditing, setCountEditing] = useState(0);
 
+  const handleDisplayForm = () => {
+    setCountEditing(0);
+    setNewProjectFormVisible(true);
+  }
+
   const handleDeleteSection = () => {
     setProjectsSectionEnabled(false);
   }
@@ -72,15 +77,15 @@ const Projects = ({ setProjectsSectionEnabled }) => {
         <button className="mode" title={countEditing === 0 ? null : "There are unsaved changes within this section"} onClick={() => handleSaveSection()} disabled={countEditing === 0 ? null : true}>Save</button>
 
         {!newProjectFormVisible &&
-          <button className="create" onClick={() => setNewProjectFormVisible(true)}>Add New Project</button>
+          <button className="create" onClick={() => handleDisplayForm()}>Add New Project</button>
         }
         
         {/* Add project form */}
         {newProjectFormVisible &&
           <NewProjectForm
             projects={projects}
-            setNewProjectFormVisible={setNewProjectFormVisible}
             setProjects={setProjects}
+            setNewProjectFormVisible={setNewProjectFormVisible}
           />
         }
       </>}

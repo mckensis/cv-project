@@ -27,7 +27,7 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
   
   return (
     <form
-      className="work-form"
+      className="new"
       onSubmit={(e) => addNewWork(e)}
     >
       <section className="form-container">

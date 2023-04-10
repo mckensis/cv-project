@@ -62,4 +62,8 @@
   .education > h2 {
     margin-top: 0;
   }
+
+  .education li {
+    font-size: 9pt;
+  }
 }

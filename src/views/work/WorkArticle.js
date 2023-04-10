@@ -20,31 +20,27 @@ const WorkArticle = ({ workSingular, work, setWork, isEditing, countEditing, set
             {workSingular['company'] && <li>{workSingular['company']}</li>}
           </ul>
         }
-        {workSingular['description'] && <p className={(!workSingular['year'] && !workSingular['title'] && !workSingular['company']) ? 'maximised' : null}>{workSingular['description']}</p>}
+
+        {/* The paragraph will span the entire section if no other info exists */}
+        {workSingular['description'] &&
+          <p className={(!workSingular['year'] && !workSingular['title'] && !workSingular['company']) ? 'maximised' : null}>{workSingular['description']}</p>}
+
+        {isEditing &&
+          <button className="edit" type="button" onClick={() => handleEditArticle()}>Edit</button>
+        }
       </>}
 
-        {/* Delete button for each item */}
-        {isEditing && !isEditingWorkArticle && <>
-          <button
-            className="edit"
-            type="button"
-            onClick={() => handleEditArticle()}
-          >
-            Edit
-          </button>
-        </>}
-
-        {isEditing && isEditingWorkArticle && <>
-          <EditWorkForm
-            workSingular={workSingular}
-            work={work}
-            setWork={setWork}
-            countEditing={countEditing}
-            setCountEditing={setCountEditing}
-            setIsEditingWorkArticle={setIsEditingWorkArticle}
-          />
-        </>}
-      </article>
+      {isEditingWorkArticle && isEditing &&
+        <EditWorkForm
+          workSingular={workSingular}
+          work={work}
+          setWork={setWork}
+          countEditing={countEditing}
+          setCountEditing={setCountEditing}
+          setIsEditingWorkArticle={setIsEditingWorkArticle}
+        />
+      }
+    </article>
   )
 }
 

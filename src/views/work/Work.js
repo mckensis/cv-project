@@ -40,6 +40,11 @@ const Work = ({ setWorkSectionEnabled }) => {
     setNewWorkFormVisible(false);
   }
 
+  const handleDisplayForm = () => {
+    setCountEditing(0);
+    setNewWorkFormVisible(true);
+  }
+
   //Create the work articles depending on the length of the work array
   const WorkArticles = () => {
     return work.length > 0 && work.map((item) => (
@@ -57,10 +62,7 @@ const Work = ({ setWorkSectionEnabled }) => {
 
   return (
     <section
-      className="work"
-      onMouseOver={() => setIsHovering(true)}
-      onMouseOut={() => setIsHovering(false)}
-    >
+      className="work" onMouseOver={() => setIsHovering(true)} onMouseOut={() => setIsHovering(false)}>
       <h2 className={isEditing ? "editing" : null}>Employment History</h2>
       
       {/* Work Articles if there is any employment history to display */}
@@ -71,15 +73,15 @@ const Work = ({ setWorkSectionEnabled }) => {
         <button className="mode" title={countEditing === 0 ? null : "There are unsaved changes within this section"} disabled={countEditing === 0 ? null : true} onClick={() => handleSaveSection()}>Save</button>
       
         {!newWorkFormVisible &&
-          <button className="create" onClick={() => setNewWorkFormVisible(true)}>Add New Work</button>
+          <button className="create" onClick={() => handleDisplayForm()}>Add New Work</button>
         }
 
         {/* Add work history form */}
         {newWorkFormVisible && 
           <NewWorkForm
             work={work}
-            setNewWorkFormVisible={setNewWorkFormVisible}
             setWork={setWork}
+            setNewWorkFormVisible={setNewWorkFormVisible}
           />
         }    
       </>}
