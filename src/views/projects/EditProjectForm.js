@@ -1,4 +1,5 @@
 import { useState } from "react";
+import checkPopulated from "../../checkPopulated";
 
 const EditProjectForm = ({
   project, projects, setProjects,
@@ -17,6 +18,11 @@ const EditProjectForm = ({
     //Get the project to be edited
     const foundProject = projects.find((item) => item.id === tempProject.id);
     if (!foundProject) {
+      return;
+    }
+
+    if (!checkPopulated(tempProject)) {
+      handleDelete();
       return;
     }
     

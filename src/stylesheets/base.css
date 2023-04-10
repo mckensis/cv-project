@@ -268,6 +268,15 @@ button.print {
   margin-top: 0.5rem;
 }
 
+.primary {
+  font-weight: 600;
+}
+
+.secondary {
+  font-style: italic;
+}
+
+
 section:not(section.education) > article:nth-of-type(odd){
   background-color: var(--highlight-color);
 }

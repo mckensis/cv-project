@@ -13,12 +13,14 @@ const WorkArticle = ({ workSingular, work, setWork, isEditing, countEditing, set
   return (
     <article className="work-article">
       {!isEditingWorkArticle && <>
-        <ul className="work-info">
-          <li>{workSingular['year']}</li>
-          <li>{workSingular['title']}</li>
-          <li>{workSingular['company']}</li>
-        </ul>
-        <p>{workSingular['description']}</p>
+        {(workSingular['year'] || workSingular['title'] || workSingular['company']) &&
+          <ul className={workSingular['description'] ? "work-info" : "work-info condensed"}>
+            {workSingular['year'] && <li className="secondary">{workSingular['year']}</li>}
+            {workSingular['title'] && <li className="primary">{workSingular['title']}</li>}
+            {workSingular['company'] && <li>{workSingular['company']}</li>}
+          </ul>
+        }
+        {workSingular['description'] && <p className={(!workSingular['year'] && !workSingular['title'] && !workSingular['company']) ? 'maximised' : null}>{workSingular['description']}</p>}
       </>}
 
         {/* Delete button for each item */}

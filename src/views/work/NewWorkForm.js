@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
+import checkPopulated from "../../checkPopulated";
 
 const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
 
@@ -13,6 +14,11 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
 
   const addNewWork = (e) => {
     e.preventDefault();
+
+    if (!checkPopulated(newWork)) {
+      return;
+    }
+
     const updatedWork = [...work, newWork];
     setWork(updatedWork);
     localStorage.setItem('work', JSON.stringify(updatedWork));
@@ -35,15 +41,6 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
           onChange={(e) => setNewWork({...newWork, title: e.target.value})}
           autoFocus
         />
-        <label htmlFor="year" tabIndex={-1}>Date</label>
-        <input
-          id="year"
-          name="year"
-          type="text"
-          placeholder="Date of Employment"
-          value={newWork['year']}
-          onChange={(e) => setNewWork({...newWork, year: e.target.value})}
-        />
         <label htmlFor="company" tabIndex={-1}>Company / Location</label>
         <input
           id="company"
@@ -52,6 +49,15 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
           placeholder="Company Name / Location"
           value={newWork['company']}
           onChange={(e) => setNewWork({...newWork, company: e.target.value})}
+        />
+        <label htmlFor="year" tabIndex={-1}>Date</label>
+        <input
+          id="year"
+          name="year"
+          type="text"
+          placeholder="Date of Employment"
+          value={newWork['year']}
+          onChange={(e) => setNewWork({...newWork, year: e.target.value})}
         />
         <label htmlFor="description" tabIndex={-1}>Description</label>
         <textarea

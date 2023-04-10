@@ -31,6 +31,5 @@
 
 .project-article > p {
   flex-basis: 100%;
-  font-style: italic;
   text-align: justify;
 }

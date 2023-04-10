@@ -1,4 +1,5 @@
 import { useState } from "react";
+import checkPopulated from "../../checkPopulated";
 
 const EditWorkForm = ({ 
   workSingular, work, setWork,
@@ -20,6 +21,11 @@ const EditWorkForm = ({
       return;
     }
 
+    if (!checkPopulated(tempWork)) {
+      handleDelete();
+      return;
+    }
+    
     // Update the value within the object key if the new value is different
     for (let item of Object.keys(foundWork)) {
       if (item !== 'id' && foundWork[item] !== tempWork[item]) {

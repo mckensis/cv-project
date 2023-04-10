@@ -1,13 +1,18 @@
 .work-article {
   display: grid;
   grid-template-columns: minmax(100px, min-content) 1fr;
-  row-gap: 0.25rem;
+  row-gap: 0.75rem;
   column-gap: 1rem;
 }
 
+/* Description of work */
 .work-article > p {
   text-align: justify;
   min-height: max-content;
+}
+
+.work-article > p.maximised {
+  grid-column: 1 / -1;
 }
 
 ul.work-info {
@@ -17,12 +22,16 @@ ul.work-info {
   gap: 0.25rem;
 }
 
-ul.work-info li:nth-of-type(1) {
-  font-style: italic;
+ul.work-info.condensed {
+  flex-direction: row;
+  grid-column: 1 / -1;
+  justify-content: center;
+  place-self: center;
+  gap: 2rem;
 }
 
-ul.work-info li:nth-of-type(2) {
-  font-weight: 600;
+ul.work-info.condensed li {
+  flex-grow: 1;
 }
 
 .work button.create {

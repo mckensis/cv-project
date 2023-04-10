@@ -25,7 +25,7 @@ const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditin
             {project['github'] ? <li key={`github-${project.id}`}><a href={project['github']}>View code</a></li> : null}
           </ul>
         }
-        <p>{project['description']}</p>
+        <p className="secondary">{project['description']}</p>
       </>}
 
       {/* Edit button for each item */}

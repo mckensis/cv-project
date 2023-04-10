@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
+import checkPopulated from "../../checkPopulated";
 
 const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => {
 
@@ -14,6 +15,11 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
 
   const addNewProject = (e) => {
     e.preventDefault();
+
+    if (!checkPopulated(newProject)) {
+      return;
+    }
+
     const updatedProjects = [...projects, newProject];
     setProjects(updatedProjects);
     localStorage.setItem('projects', JSON.stringify(updatedProjects));
