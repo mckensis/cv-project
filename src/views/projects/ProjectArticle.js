@@ -1,21 +1,8 @@
 import { useState } from "react";
-import ProjectArticleEditForm from "./ProjectArticleEditForm";
+import EditProjectForm from "./EditProjectForm";
 
-const ProjectArticle = ({ projects, setProjects, project, isEditing, countEditing, setCountEditing }) => {
-  const { year, title, description, url, github } = project;
-
+const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditing, setCountEditing }) => {
   const [isEditingProjectArticle, setIsEditingProjectArticle] = useState(false);
-  const [projectYear, setProjectYear] = useState(year);
-  const [projectTitle, setProjectTitle] = useState(title);
-  const [projectDescription, setProjectDescription] = useState(description);
-  const [projectUrl, setProjectUrl] = useState(url);
-  const [projectGithub, setProjectGithub] = useState(github);
-
-  const handleDelete = () => {
-    const count = countEditing - 1;
-    setCountEditing(count);
-    setProjects(projects.filter(element => element.id !== project.id));
-  }
 
   const handleEditArticle = () => {
     const count = countEditing + 1;
@@ -23,60 +10,39 @@ const ProjectArticle = ({ projects, setProjects, project, isEditing, countEditin
     setCountEditing(count);
   }
 
-  const handleSave = (e) => {
-    const count = countEditing - 1;
-    setIsEditingProjectArticle(false);
-    setCountEditing(count);
-  }
-
   return (
     <article className="project-article">
       {!isEditingProjectArticle && <>
         <section className="project-info">
-          <h3>{projectTitle}</h3>
-          <p>{projectYear}</p>
+          <h3>{project['title']}</h3>
+          <p>{project['year']}</p>
         </section>
-        
+
         {/* If either of the links exist, create elements for them */}
-        {(projectUrl || projectGithub) && 
+        {(project['url'] || project['github']) && 
           <ul className="project-links">
-            {projectUrl ? <li><a href={projectUrl}>View live</a></li> : null}
-            {projectGithub ? <li><a href={projectGithub}>View code</a></li> : null}
+            {project['url'] ? <li><a href={project['url']}>View live</a></li> : null}
+            {project['github'] ? <li><a href={project['github']}>View code</a></li> : null}
           </ul>
         }
-
-        <p>{projectDescription}</p>
+        <p>{project['description']}</p>
       </>}
 
-        {/* Delete button for each item */}
-        {isEditing && !isEditingProjectArticle && <>
-          <button
-            className="edit"
-            type="button"
-            onClick={() => handleEditArticle()}
-          >
-            Edit
-          </button>
-        </>}
+      {/* Edit button for each item */}
+      {!isEditingProjectArticle && isEditing &&  <button className="edit" type="button" onClick={() => handleEditArticle()}>Edit</button>}
 
-        {isEditing && isEditingProjectArticle && <>
-          <ProjectArticleEditForm
-            projectYear={projectYear}
-            setProjectYear={setProjectYear}
-            projectTitle={projectTitle}
-            setProjectTitle={setProjectTitle}
-            projectDescription={projectDescription}
-            setProjectDescription={setProjectDescription}
-            projectUrl={projectUrl}
-            setProjectUrl={setProjectUrl}
-            projectGithub={projectGithub}
-            setProjectGithub={setProjectGithub}
-            setIsEditingProjectArticle={setIsEditingProjectArticle}
-            handleDelete={handleDelete}
-            handleSave={handleSave}
-          />
-        </>}
-      </article>
+      {/* Article Edit Form */}
+      {isEditingProjectArticle && isEditing && <>
+        <EditProjectForm
+          project={project}
+          projects={projects}
+          setProjects={setProjects}
+          countEditing={countEditing}
+          setCountEditing={setCountEditing}
+          setIsEditingProjectArticle={setIsEditingProjectArticle}
+        />
+      </>}
+    </article>
   )
 }
 

@@ -2,7 +2,7 @@ import About from "./about/About";
 import Education from "./education/Education";
 import Personal from "./personal/Personal";
 import Projects from "./projects/Projects";
-import Skills from "./Skills";
+import Skills from "./skills/Skills";
 import Work from "./work/Work";
 import { useState } from "react";
 
@@ -32,13 +32,13 @@ const MainComponent = () => {
         <Skills setSkillsSectionEnabled={setSkillsSectionEnabled} />}
       
       {projectsSectionEnabled &&
-        <Projects />}
+        <Projects setProjectsSectionEnabled={setProjectsSectionEnabled} />}
   
       {workSectionEnabled &&
-        <Work />}
+        <Work setWorkSectionEnabled={setWorkSectionEnabled} />}
       
       {educationSectionEnabled &&
-        <Education />}
+        <Education setEducationSectionEnabled={setEducationSectionEnabled} />}
     </main>
   )
 }

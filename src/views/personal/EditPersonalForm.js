@@ -3,7 +3,7 @@ const EditPersonalForm =
   emailAddress, setEmailAddress, website, setWebsite }) => {  
     
     return (
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form className="personal-details" onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="name" tabIndex={-1}>Name</label>
         <input
           type="text"
@@ -15,7 +15,7 @@ const EditPersonalForm =
           autoFocus
           placeholder="Full Name"
           maxLength="25"
-          />
+        />
         {/* Phone number input */}
         <label htmlFor="contact" tabIndex={-1}>Name</label>
         <input
@@ -27,7 +27,7 @@ const EditPersonalForm =
           maxLength="20"
           onChange={(e) => setPhoneNumber(e.target.value)}
           placeholder="Contact No."
-          />
+        />
         {/* Email address input */}
         <label htmlFor="email" tabIndex={-1}>Name</label>
         <input
@@ -39,7 +39,7 @@ const EditPersonalForm =
           maxLength="30"
           onChange={(e) => setEmailAddress(e.target.value)}
           placeholder="Email Address"
-          />
+        />
         {/* Website input */}
         <label htmlFor="website" tabIndex={-1}>Name</label>
         <input
@@ -51,7 +51,7 @@ const EditPersonalForm =
           maxLength="30"
           onChange={(e) => setWebsite(e.target.value)}
           placeholder="Website"
-          />
+        />
       </form>
     )
 }

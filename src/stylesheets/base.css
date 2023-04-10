@@ -112,6 +112,7 @@ form.edit,
 form.new {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   background-color: var(--highlight-color);
@@ -200,8 +201,12 @@ button {
   width: 4rem;
 }
 
-button:hover {
+button:hover:not(button:disabled:hover) {
   background-color: #CDD7D6;
+}
+
+button:disabled:hover {
+  cursor: default;
 }
 
 /* Edit / Save mode button */
@@ -268,11 +273,6 @@ section:not(section.education) > article:nth-of-type(odd){
 
 section > article {
   padding: 0.5rem;
-}
-
-section > article:nth-last-of-type(1) {
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .tooltip {

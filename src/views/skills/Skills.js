@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
-import EditSkillsForm from "./skills/EditSkillsForm";
+import EditSkillsForm from "./EditSkillsForm";
 
 const Skills = ({ setSkillsSectionEnabled }) => {
   const [isEditing, setIsEditing] = useState(false);
