@@ -11,6 +11,7 @@ import './stylesheets/Print.css';
 
 function App() {
 
+  // localStorage.clear();
 
   return (
     <div className="App">

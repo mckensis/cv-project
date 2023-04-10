@@ -4,7 +4,7 @@ const EditProjectForm = ({
   project, projects, setProjects,
   countEditing, setCountEditing, setIsEditingProjectArticle }) => {
 
-  const [tempProject, setTempProject] = useState({...project});
+  const [tempProject, setTempProject] = useState({ ...project });
 
   const handleDelete = () => {
     const count = countEditing - 1;

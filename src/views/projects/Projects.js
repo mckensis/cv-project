@@ -62,31 +62,33 @@ const Projects = ({ setProjectsSectionEnabled }) => {
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
     >
-    {/* Heading */}
-    <h2 className={isEditing ? "editing" : null}>Projects</h2>   
-    
-    {/* Work Articles if there is any employment history to display */}
-    {ProjectArticles()}
+      <h2 className={isEditing ? "editing" : null}>Projects</h2>   
+      
+      {/* Work Articles if there is any employment history to display */}
+      {!newProjectFormVisible && ProjectArticles()}
 
-    {/* Delete and Save buttons */}
-    {isEditing && <>
-      <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>      
-      <button className="mode" title="There are unsaved changes within this section" onClick={() => handleSaveSection()} disabled={countEditing === 0 ? null : true}>Save</button>
-      {newProjectFormVisible ?
-        <NewProjectForm
-          key={"NewProjectForm"}
-          projects={projects}
-          setNewProjectFormVisible={setNewProjectFormVisible}
-          setProjects={setProjects}
-        />
-      : <button className="create" onClick={() => setNewProjectFormVisible(true)}>Add New Project</button>
-      }    
-    </>}
+      {isEditing && <>
+        <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>      
+        <button className="mode" title={countEditing === 0 ? null : "There are unsaved changes within this section"} onClick={() => handleSaveSection()} disabled={countEditing === 0 ? null : true}>Save</button>
 
-    {/* Edit section button */}
-    {isHovering && !isEditing &&
-      <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
-    }
+        {!newProjectFormVisible &&
+          <button className="create" onClick={() => setNewProjectFormVisible(true)}>Add New Project</button>
+        }
+        
+        {/* Add project form */}
+        {newProjectFormVisible &&
+          <NewProjectForm
+            projects={projects}
+            setNewProjectFormVisible={setNewProjectFormVisible}
+            setProjects={setProjects}
+          />
+        }
+      </>}
+
+      {/* Edit section button */}
+      {isHovering && !isEditing &&
+        <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
+      }
     </section>
   )
 }

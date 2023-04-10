@@ -1,26 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NewWorkForm from "./NewWorkForm";
 import WorkArticle from "./WorkArticle";
 import { v4 as uuid } from "uuid";
 
-const Work = () => {
-  const [sectionEnabled, setSectionEnabled] = useState(false);
+const Work = ({ setWorkSectionEnabled }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newWorkFormVisible, setNewWorkFormVisible] = useState(false);
-  const [work, setWork] = useState([
+  const [work, setWork] = useState(
+    JSON.parse(localStorage.getItem('work'))
+    || [
     {
       id: uuid(),
       year: '2014 - 2022',
       company: 'Stonegate',
-      jobTitle: 'Assistant Manager',
+      title: 'Assistant Manager',
       description: `This would be a description of the role, such as daily duties and things that were a main focus. I would probably also include things such as following the company values, training, and teamwork.`
     },
     {
       id: uuid(),
       year: '2012 - 2014',
       company: `Mum's Farm`,
-      jobTitle: 'Egg Tester',
+      title: 'Egg Tester',
       description: `A second job description.`
     },
   ]);
@@ -29,14 +30,8 @@ const Work = () => {
   //Will help disable / enable the save section button
   const [countEditing, setCountEditing] = useState(0);
 
-  useEffect(() => {
-    if (work.length > 0) {
-      setSectionEnabled(true);
-    }
-  }, [work.length]);
-
   const handleDeleteSection = () => {
-    setSectionEnabled(false);
+    setWorkSectionEnabled(false);
     setWork([]);
   }
 
@@ -47,16 +42,15 @@ const Work = () => {
 
   //Create the work articles depending on the length of the work array
   const WorkArticles = () => {
-    return work.length > 0 && work.map((item, idx) => (
+    return work.length > 0 && work.map((item) => (
       <WorkArticle
         key={item.id}
+        workSingular={item}
         work={work}
         setWork={setWork}
         isEditing={isEditing}
-        item={item}
-        setCountEditing={setCountEditing}
         countEditing={countEditing}
-        index={idx}
+        setCountEditing={setCountEditing}
       />
     ))
   }
@@ -67,34 +61,16 @@ const Work = () => {
       onMouseOver={() => setIsHovering(true)}
       onMouseOut={() => setIsHovering(false)}
     >
+      <h2 className={isEditing ? "editing" : null}>Employment History</h2>
+      
+      {/* Work Articles if there is any employment history to display */}
+      {!newWorkFormVisible && WorkArticles()}
 
-      {sectionEnabled && <>
-        {/* Heading */}
-        {isEditing ? <h2 className="editing">Employment History</h2> : <h2>Employment History</h2>}
-        
-        {/* Work Articles if there is any employment history to display */}
-        {WorkArticles()}
-
-        {/* Delete section button */}
-        {isEditing &&
-          <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
-        }
-
-        {/* Edit section button */}
-        {isHovering && !isEditing &&
-          <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
-        }
-
-        {/* Save section button */}
-        {isEditing ?
-          countEditing === 0 ?
-            <button className="mode" onClick={() => handleSaveSection()}>Save</button>
-            : <button className="mode" disabled title="Save or delete any section entries currently in edit mode to save.">Save</button>
-          : null
-        }
-        
-        {/* Add work history button */}
-        {isEditing && !newWorkFormVisible &&
+      {isEditing && <>
+        <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>
+        <button className="mode" title={countEditing === 0 ? null : "There are unsaved changes within this section"} disabled={countEditing === 0 ? null : true} onClick={() => handleSaveSection()}>Save</button>
+      
+        {!newWorkFormVisible &&
           <button className="create" onClick={() => setNewWorkFormVisible(true)}>Add New Work</button>
         }
 
@@ -105,12 +81,12 @@ const Work = () => {
             setNewWorkFormVisible={setNewWorkFormVisible}
             setWork={setWork}
           />
-        }
+        }    
       </>}
-      
-      {/* Add work section button */}
-      {!sectionEnabled &&
-        <button className="add" onClick={() => setSectionEnabled(true)}>Add Work Section</button>
+
+      {/* Edit section button */}
+      {isHovering && !isEditing &&
+        <button className="mode" onClick={() => setIsEditing(true)}>Edit</button>
       }
     </section>
   )

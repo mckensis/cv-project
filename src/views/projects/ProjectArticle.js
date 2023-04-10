@@ -34,7 +34,6 @@ const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditin
       {/* Article Edit Form */}
       {isEditingProjectArticle && isEditing && <>
         <EditProjectForm
-          key={"EditProjectForm"}
           project={project}
           projects={projects}
           setProjects={setProjects}

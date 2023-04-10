@@ -1,20 +1,8 @@
 import { useState } from "react";
-import WorkArticleEditForm from "./WorkArticleEditForm";
+import EditWorkForm from "./EditWorkForm";
 
-const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEditing, setCountEditing }) => {
-  const { year, company, jobTitle, description } = item;
-
+const WorkArticle = ({ workSingular, work, setWork, isEditing, countEditing, setCountEditing }) => {
   const [isEditingWorkArticle, setIsEditingWorkArticle] = useState(false);
-  const [workYear, setWorkYear] = useState(year);
-  const [workCompany, setWorkCompany] = useState(company);
-  const [workTitle, setWorkTitle] = useState(jobTitle);
-  const [workDescription, setWorkDescription] = useState(description);
-
-  const handleDelete = () => {
-    const count = countEditing - 1;
-    setCountEditing(count);
-    setWork(work.filter(element => element.id !== item.id));
-  }
 
   const handleEditArticle = () => {
     const count = countEditing + 1;
@@ -22,21 +10,15 @@ const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEd
     setCountEditing(count);
   }
 
-  const handleSave = (e) => {
-    const count = countEditing - 1;
-    setIsEditingWorkArticle(false);
-    setCountEditing(count);
-  }
-
   return (
     <article className="work-article">
       {!isEditingWorkArticle && <>
         <ul className="work-info">
-          <li>{workYear}</li>
-          <li>{workTitle}</li>
-          <li>{workCompany}</li>
+          <li>{workSingular['year']}</li>
+          <li>{workSingular['title']}</li>
+          <li>{workSingular['company']}</li>
         </ul>
-        <p>{workDescription}</p>
+        <p>{workSingular['description']}</p>
       </>}
 
         {/* Delete button for each item */}
@@ -51,19 +33,13 @@ const WorkArticle = ({ work, setWork, item, isEditing, setButtonEnabled, countEd
         </>}
 
         {isEditing && isEditingWorkArticle && <>
-          
-          <WorkArticleEditForm
-            workYear={workYear}
-            setWorkYear={setWorkYear}
-            workTitle={workTitle}
-            setWorkTitle={setWorkTitle}
-            workDescription={workDescription}
-            setWorkDescription={setWorkDescription}
-            workCompany={workCompany}
-            setWorkCompany={setWorkCompany}
+          <EditWorkForm
+            workSingular={workSingular}
+            work={work}
+            setWork={setWork}
+            countEditing={countEditing}
+            setCountEditing={setCountEditing}
             setIsEditingWorkArticle={setIsEditingWorkArticle}
-            handleDelete={handleDelete}
-            handleSave={handleSave}
           />
         </>}
       </article>

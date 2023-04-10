@@ -2,16 +2,20 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
-  
-  const [year, setYear] = useState('');
-  const [company, setCompany] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
-  const [description, setDescription] = useState('');
+
+  const [newWork, setNewWork] = useState({
+    id: uuid(),
+    year: '',
+    title: '',
+    company: '',
+    description: ''
+  });
 
   const addNewWork = (e) => {
-    const newWork = { year, company, jobTitle, description, id: uuid() };
+    e.preventDefault();
     const updatedWork = [...work, newWork];
     setWork(updatedWork);
+    localStorage.setItem('work', JSON.stringify(updatedWork));
     setNewWorkFormVisible(false);
   }
   
@@ -21,46 +25,42 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
       onSubmit={(e) => addNewWork(e)}
     >
       <section className="form-container">
-        <label htmlFor="year">Date</label>
+        <label htmlFor="title" tabIndex={-1}>Job Title</label>
+        <input
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Job Title"
+          value={newWork['title']}
+          onChange={(e) => setNewWork({...newWork, title: e.target.value})}
+          autoFocus
+        />
+        <label htmlFor="year" tabIndex={-1}>Date</label>
         <input
           id="year"
           name="year"
           type="text"
           placeholder="Date of Employment"
-          value={year}
-          onChange={(e) => setYear(e.target.value)}
-          required
-          autoFocus
-          />
-        <label htmlFor="company">Company / Location</label>
+          value={newWork['year']}
+          onChange={(e) => setNewWork({...newWork, year: e.target.value})}
+        />
+        <label htmlFor="company" tabIndex={-1}>Company / Location</label>
         <input
           id="company"
           name="company"
           type="text"
           placeholder="Company Name / Location"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-          required
+          value={newWork['company']}
+          onChange={(e) => setNewWork({...newWork, company: e.target.value})}
         />
-        <label htmlFor="job">Job Title</label>
-        <input
-          id="job"
-          name="job"
-          type="text"
-          placeholder="Job Title"
-          value={jobTitle}
-          onChange={(e) => setJobTitle(e.target.value)}
-          required
-        />
+        <label htmlFor="description" tabIndex={-1}>Description</label>
         <textarea
           name="description"
           id="description"
-          rows="3"
           placeholder="Description of the Job"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          >
-        </textarea>
+          value={newWork['description']}
+          onChange={(e) => setNewWork({...newWork, description: e.target.value})}
+        />
       </section>
       <section className="button-container">
         <button className="cancel" type="button" onClick={() => setNewWorkFormVisible(false)}>Cancel</button>

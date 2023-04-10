@@ -4,12 +4,12 @@ import { v4 as uuid } from "uuid";
 const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => {
 
   const [newProject, setNewProject] = useState({
-    year: '',
+    id: uuid(),
     title: '',
+    year: '',
     description: '',
     url: '',
     github: '',
-    id: uuid()
   });
 
   const addNewProject = (e) => {
