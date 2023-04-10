@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cv-project/static/css/main.48ecfd71.css",
+    "main.js": "/cv-project/static/js/main.0d259bf1.js",
+    "static/media/Calibri.woff": "/cv-project/static/media/Calibri.b79e6a3ae8c63fb5b57b.woff",
+    "static/media/Calibri.woff2": "/cv-project/static/media/Calibri.6d82cfabc309b9253a36.woff2",
+    "index.html": "/cv-project/index.html",
+    "main.48ecfd71.css.map": "/cv-project/static/css/main.48ecfd71.css.map",
+    "main.0d259bf1.js.map": "/cv-project/static/js/main.0d259bf1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.48ecfd71.css",
+    "static/js/main.0d259bf1.js"
+  ]
+}
