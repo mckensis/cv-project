@@ -3,7 +3,7 @@ import NewWorkForm from "./NewWorkForm";
 import WorkArticle from "./WorkArticle";
 import { v4 as uuid } from "uuid";
 
-const Work = ({ setWorkSectionEnabled }) => {
+const Work = ({ updatePreferences }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newWorkFormVisible, setNewWorkFormVisible] = useState(false);
@@ -31,8 +31,7 @@ const Work = ({ setWorkSectionEnabled }) => {
   const [countEditing, setCountEditing] = useState(0);
 
   const handleDeleteSection = () => {
-    setWorkSectionEnabled(false);
-    setWork([]);
+    updatePreferences("work");
   }
 
   const handleSaveSection = () => {

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-const EditSkillsForm = ({ skills, setSkills, SkillItems, setIsEditing, setSkillsSectionEnabled }) => {
+const EditSkillsForm = ({ skills, setSkills, SkillItems, setIsEditing, updatePreferences }) => {
   const [newSkill, setNewSkill] = useState('');
   
   const handleDeleteSection = () => {
-    setSkillsSectionEnabled(false);
+    updatePreferences("skills");
   }
 
   const handleSaveSection = () => {

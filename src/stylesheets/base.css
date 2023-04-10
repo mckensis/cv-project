@@ -81,7 +81,6 @@ main {
 .projects {
   display: grid;
   position: relative;
-  align-content: start;
   grid-auto-rows: max-content;
 }
 
@@ -134,10 +133,6 @@ form.edit .form-container {
   flex-basis: 100%;
   justify-content: center;
   flex-direction: column;
-}
-
-form input:nth-of-type(1):not(.skills input) {
-  font-weight: 600;
 }
 
 input {

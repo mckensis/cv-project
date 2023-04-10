@@ -2,7 +2,7 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import EditSkillsForm from "./EditSkillsForm";
 
-const Skills = ({ setSkillsSectionEnabled }) => {
+const Skills = ({ updatePreferences }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [skills, setSkills] = useState(
@@ -73,7 +73,7 @@ const Skills = ({ setSkillsSectionEnabled }) => {
           setSkills={setSkills}
           SkillItems={SkillItems}
           setIsEditing={setIsEditing}
-          setSkillsSectionEnabled={setSkillsSectionEnabled}
+          updatePreferences={updatePreferences}
         />
       }
 

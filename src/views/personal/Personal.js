@@ -29,7 +29,7 @@ const Personal = () => {
   const PersonalDetails = () => {
     return (
       <>
-      <h3>{name}</h3>
+      <h3>{name ? name : 'Full Name'}</h3>
       {(phoneNumber || emailAddress || website) &&      
         <ul>
           {phoneNumber && <li key="phoneNumber">{phoneNumber}</li>}

@@ -1,16 +1,16 @@
-const EditAboutForm = ({ details, setDetails, setAboutSectionEnabled, setIsEditing }) => {
+const EditAboutForm = ({ details, setDetails, setIsEditing, updatePreferences }) => {
   const handleDeleteSection = () => {
-    setAboutSectionEnabled(false);
-    setDetails('');
+    updatePreferences("about");
   }
 
-  const handleSaveSection = () => {
+  const handleSaveSection = (e) => {
+    e.preventDefault();
     localStorage.setItem('details', details);
     setIsEditing(false);
   }
   
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => handleSaveSection(e)}>
       <label htmlFor="about" tabIndex={-1}>About</label>
       <textarea
         type="text"
@@ -22,7 +22,7 @@ const EditAboutForm = ({ details, setDetails, setAboutSectionEnabled, setIsEditi
         maxLength="300"
       />
       <button type="button" className="remove" onClick={() => handleDeleteSection()}>Delete</button>
-      <button type="submit" className="mode" onClick={() => handleSaveSection()}>Save</button>
+      <button type="submit" className="mode">Save</button>
     </form>
 
   )

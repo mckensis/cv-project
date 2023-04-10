@@ -8,37 +8,47 @@ import { useState } from "react";
 
 const MainComponent = () => {
   // States for controlling visibility of sections or a button to show the section
-  const [aboutSectionEnabled, setAboutSectionEnabled] = useState(true);
-  const [skillsSectionEnabled, setSkillsSectionEnabled] = useState(true);
-  const [projectsSectionEnabled, setProjectsSectionEnabled] = useState(true);
-  const [workSectionEnabled, setWorkSectionEnabled] = useState(true);
-  const [educationSectionEnabled, setEducationSectionEnabled] = useState(true);
+  const [preferences, setPreferences] = useState(
+    JSON.parse(localStorage.getItem('preferences')) || {
+    about: true,
+    skills: true,
+    projects: true,
+    work: true,
+    education: true
+  });
+
+  const updatePreferences = (option) => {
+    const newPref = JSON.parse(localStorage.getItem("preferences")) || preferences;
+    newPref[option] = !newPref[option];
+    setPreferences({...newPref});
+    localStorage.setItem('preferences', JSON.stringify(newPref));
+  }
 
   return (
     <main id="main">
       <Personal />
 
       {/* Buttons to enable various sections */}
-      {!aboutSectionEnabled && <button className="add" onClick={() => setAboutSectionEnabled(true)}>Add About Section</button>}
-      {!skillsSectionEnabled && <button className="add" onClick={() => setSkillsSectionEnabled(true)}>Add Key Skills Section</button>}
-      {!projectsSectionEnabled && <button className="add" onClick={() => setProjectsSectionEnabled(true)}>Add Projects Section</button>}
-      {!workSectionEnabled && <button className="add" onClick={() => setWorkSectionEnabled(true)}>Add Work Section</button>}
-      {!educationSectionEnabled && <button className="add" onClick={() => setEducationSectionEnabled(true)}>Add Education Section</button>}
+      {!preferences["about"] && <button className="add" onClick={() => updatePreferences("about")}>Add About Section</button>}
+      {!preferences["skills"] && <button className="add" onClick={() => updatePreferences("skills")}>Add Key Skills Section</button>}
+      {!preferences["projects"] && <button className="add" onClick={() => updatePreferences("projects")}>Add Projects Section</button>}
+      {!preferences["work"] && <button className="add" onClick={() => updatePreferences("work")}>Add Work Section</button>}
+      {!preferences["education"] && <button className="add" onClick={() => updatePreferences("education")}>Add Education Section</button>}
 
-      {aboutSectionEnabled &&
-        <About setAboutSectionEnabled={setAboutSectionEnabled} />}
+      {preferences["about"] &&
+        <About updatePreferences={updatePreferences} />}
 
-      {skillsSectionEnabled &&
-        <Skills setSkillsSectionEnabled={setSkillsSectionEnabled} />}
+      {preferences["skills"] &&
+        <Skills updatePreferences={updatePreferences} />}
       
-      {projectsSectionEnabled &&
-        <Projects setProjectsSectionEnabled={setProjectsSectionEnabled} />}
+      {preferences["projects"] &&
+        <Projects updatePreferences={updatePreferences} />}
   
-      {workSectionEnabled &&
-        <Work setWorkSectionEnabled={setWorkSectionEnabled} />}
+      {preferences["work"] &&
+        <Work updatePreferences={updatePreferences} />}
       
-      {educationSectionEnabled &&
-        <Education setEducationSectionEnabled={setEducationSectionEnabled} />}
+      {preferences["education"] &&
+        <Education updatePreferences={updatePreferences} />}
     </main>
   )
 }

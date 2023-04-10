@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EditAboutForm from "./EditAboutForm";
 
-const About = ({ setAboutSectionEnabled }) => {
+const About = ({ updatePreferences }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [details, setDetails] = useState(
@@ -12,10 +12,10 @@ const About = ({ setAboutSectionEnabled }) => {
   const EditForm = () => {
     return (
       <EditAboutForm
+        updatePreferences={updatePreferences}
         details={details}
         setDetails={setDetails}
         setIsEditing={setIsEditing}
-        setAboutSectionEnabled={setAboutSectionEnabled}
       />
     )
   }

@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import EducationArticle from "./EducationArticle";
 import NewEducationForm from "./NewEducationForm";
 
-const Education = ({ setEducationSectionEnabled }) => {
+const Education = ({ updatePreferences }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newEducationFormVisible, setNewEducationFormVisible] = useState(false);
@@ -29,7 +29,7 @@ const Education = ({ setEducationSectionEnabled }) => {
   const [countEditing, setCountEditing] = useState(0);
 
   const handleDeleteSection = () => {
-    setEducationSectionEnabled(false);
+    updatePreferences("education");
   }
 
   const handleSaveSection = () => {

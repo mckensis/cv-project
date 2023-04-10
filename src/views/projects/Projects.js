@@ -3,7 +3,7 @@ import NewProjectForm from "./NewProjectForm";
 import ProjectArticle from "./ProjectArticle";
 import { v4 as uuid } from "uuid";
 
-const Projects = ({ setProjectsSectionEnabled }) => {
+const Projects = ({ updatePreferences }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newProjectFormVisible, setNewProjectFormVisible] = useState(false);
@@ -38,7 +38,7 @@ const Projects = ({ setProjectsSectionEnabled }) => {
   }
 
   const handleDeleteSection = () => {
-    setProjectsSectionEnabled(false);
+    updatePreferences("projects");
   }
 
   const handleSaveSection = () => {
