@@ -25,7 +25,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
       className="project-form"
       onSubmit={(e) => addNewProject(e)}
     >
-      <label htmlFor="title">Project Title</label>
+      <label htmlFor="title" tabIndex={-1}>Project Title</label>
       <input
         autoFocus
         id="title"
@@ -35,7 +35,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         value={newProject['title']}
         onChange={(e) => setNewProject({...newProject, title: e.target.value})}
       />
-      <label htmlFor="year">Date of Project</label>
+      <label htmlFor="year" tabIndex={-1}>Date of Project</label>
       <input
         id="year"
         name="year"
@@ -44,7 +44,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         value={newProject['year']}
         onChange={(e) => setNewProject({...newProject, year: e.target.value})}
       />
-      <label htmlFor="url">Project Url</label>
+      <label htmlFor="url" tabIndex={-1}>Project Url</label>
       <input
         id="url"
         name="url"
@@ -53,7 +53,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         value={newProject['url']}
         onChange={(e) => setNewProject({...newProject, url: e.target.value})}
       />
-      <label htmlFor="github">GitHub Url</label>
+      <label htmlFor="github" tabIndex={-1}>GitHub Url</label>
       <input
         id="github"
         name="github"
@@ -62,7 +62,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         value={newProject['github']}
         onChange={(e) => setNewProject({...newProject, github: e.target.value})}
       />
-      <label htmlFor="description">Description</label>
+      <label htmlFor="description" tabIndex={-1}>Description</label>
       <textarea
         name="description"
         id="description"

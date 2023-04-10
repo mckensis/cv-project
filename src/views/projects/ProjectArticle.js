@@ -21,8 +21,8 @@ const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditin
         {/* If either of the links exist, create elements for them */}
         {(project['url'] || project['github']) && 
           <ul className="project-links">
-            {project['url'] ? <li key={`URL-${project.id}`}><a href={project['url']}>View live</a></li> : null}
-            {project['github'] ? <li key={`GitHub-${project.id}`}><a href={project['github']}>View code</a></li> : null}
+            {project['url'] ? <li key={`url-${project.id}`}><a href={project['url']}>View live</a></li> : null}
+            {project['github'] ? <li key={`github-${project.id}`}><a href={project['github']}>View code</a></li> : null}
           </ul>
         }
         <p>{project['description']}</p>

@@ -43,16 +43,15 @@ const Projects = ({ setProjectsSectionEnabled }) => {
 
   //Create the work articles depending on the length of the work array
   const ProjectArticles = () => {
-    return projects.length > 0 && projects.map((project, idx) => (
+    return projects.length > 0 && projects.map((project) => (
       <ProjectArticle
         key={project.id}
+        project={project}
         projects={projects}
         setProjects={setProjects}
         isEditing={isEditing}
-        project={project}
-        setCountEditing={setCountEditing}
         countEditing={countEditing}
-        index={idx}
+        setCountEditing={setCountEditing}
       />
     ))
   }
@@ -65,8 +64,10 @@ const Projects = ({ setProjectsSectionEnabled }) => {
     >
     {/* Heading */}
     <h2 className={isEditing ? "editing" : null}>Projects</h2>   
+    
     {/* Work Articles if there is any employment history to display */}
     {ProjectArticles()}
+
     {/* Delete and Save buttons */}
     {isEditing && <>
       <button className="remove" onClick={() => handleDeleteSection()}>Delete</button>      

@@ -30,11 +30,13 @@ const Personal = () => {
     return (
       <>
       <h3>{name}</h3>
-      <ul>
-        <li>{phoneNumber}</li>
-        <li><a href={`mailto:${emailAddress}`}>{emailAddress}</a></li>
-        <li><a href={website} className="website">{website}</a></li>
-      </ul>
+      {(phoneNumber || emailAddress || website) &&      
+        <ul>
+          {phoneNumber && <li key="phoneNumber">{phoneNumber}</li>}
+          {emailAddress &&<li key="emailAddress"><a href={`mailto:${emailAddress}`}>{emailAddress}</a></li>}
+          {website && <li key="website"><a href={website} className="website">{website}</a></li>}
+        </ul>
+      }
       </>
     )
   }
