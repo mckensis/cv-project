@@ -28,7 +28,6 @@ const Projects = ({ setProjectsSectionEnabled }) => {
     },
   ]);
 
-
   //Count how many entries in the section are currently in edit mode
   //Will help disable / enable the save section button
   const [countEditing, setCountEditing] = useState(0);
@@ -74,6 +73,7 @@ const Projects = ({ setProjectsSectionEnabled }) => {
       <button className="mode" title="There are unsaved changes within this section" onClick={() => handleSaveSection()} disabled={countEditing === 0 ? null : true}>Save</button>
       {newProjectFormVisible ?
         <NewProjectForm
+          key={"NewProjectForm"}
           projects={projects}
           setNewProjectFormVisible={setNewProjectFormVisible}
           setProjects={setProjects}

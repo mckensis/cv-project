@@ -58,4 +58,8 @@
   label.visible {
     display: none;
   }
+
+  .education > h2 {
+    margin-top: 0;
+  }
 }

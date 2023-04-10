@@ -2,17 +2,21 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => {
-  
-  const [year, setYear] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [url, setUrl] = useState('');
-  const [github, setGithub] = useState('');
+
+  const [newProject, setNewProject] = useState({
+    year: '',
+    title: '',
+    description: '',
+    url: '',
+    github: '',
+    id: uuid()
+  });
 
   const addNewProject = (e) => {
-    const newProject = { year, title, description, url, github, id: uuid() };
+    e.preventDefault();
     const updatedProjects = [...projects, newProject];
     setProjects(updatedProjects);
+    localStorage.setItem('projects', JSON.stringify(updatedProjects));
     setNewProjectFormVisible(false);
   }
 
@@ -23,13 +27,13 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
     >
       <label htmlFor="title">Project Title</label>
       <input
+        autoFocus
         id="title"
         name="title"
         type="text"
         placeholder="Project Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
+        value={newProject['title']}
+        onChange={(e) => setNewProject({...newProject, title: e.target.value})}
       />
       <label htmlFor="year">Date of Project</label>
       <input
@@ -37,10 +41,8 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         name="year"
         type="text"
         placeholder="Date of project"
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-        required
-        autoFocus
+        value={newProject['year']}
+        onChange={(e) => setNewProject({...newProject, year: e.target.value})}
       />
       <label htmlFor="url">Project Url</label>
       <input
@@ -48,9 +50,8 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         name="url"
         type="text"
         placeholder="Project URL"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        required
+        value={newProject['url']}
+        onChange={(e) => setNewProject({...newProject, url: e.target.value})}
       />
       <label htmlFor="github">GitHub Url</label>
       <input
@@ -58,9 +59,8 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         name="github"
         type="text"
         placeholder="GitHub URL"
-        value={github}
-        onChange={(e) => setGithub(e.target.value)}
-        required
+        value={newProject['github']}
+        onChange={(e) => setNewProject({...newProject, github: e.target.value})}
       />
       <label htmlFor="description">Description</label>
       <textarea
@@ -68,8 +68,8 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
         id="description"
         rows="3"
         placeholder="Description of the Project"
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
+        onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+        value={newProject['description']}
       >
       </textarea>
       <section className="button-container">
