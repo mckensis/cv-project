@@ -45,6 +45,10 @@
     text-decoration: none;
   }
 
+  .personal h3 {
+    font-size: 20pt;
+  }
+
   .work-article {
     grid-template-columns: minmax(120px, min-content) 1fr;
   }

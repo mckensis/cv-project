@@ -2,41 +2,40 @@ import { useEffect, useState } from "react";
 import EditPersonalForm from "./EditPersonalForm";
 
 const Personal = () => {
-  const [name, setName] = useState(
-    localStorage.getItem('name') || 'Bort Simpsen'
-  );
-  const [phoneNumber, setPhoneNumber] = useState(
-    localStorage.getItem('phone') || '07890 123 456'
-  );
-  const [emailAddress, setEmailAddress] = useState(
-    localStorage.getItem('email') || 'email@address.com'
-  );
-  const [website, setWebsite] = useState(
-    localStorage.getItem('website') || 'https://example.com'
-  );
-
   const [isHovering, setIsHovering] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Update localStorage when any personal info changes
-  useEffect(() => {
-    localStorage.setItem('name', name);
-    localStorage.setItem('phone', phoneNumber);
-    localStorage.setItem('email', emailAddress);
-    localStorage.setItem('website', website);
-  }, [name, phoneNumber, emailAddress, website]);
+  const [info, setInfo] = useState(
+    JSON.parse(localStorage.getItem('info')) 
+    || {
+      name: 'Bort Simpsen',
+      subtitle: 'Front End Developer',
+      phone: '07890 123 456',
+      website: 'https://www.example.com',
+      email: 'email@address.com',
+      location: 'Glasgow, Scotland'
+    }
+  );
+
+  const handleUpdateDetails = () => {
+    localStorage.setItem('info', JSON.stringify(info));
+    setIsEditing(false);
+  }
 
   const PersonalDetails = () => {
     return (
       <>
-      <h3>{name ? name : 'Full Name'}</h3>
-      {(phoneNumber || emailAddress || website) &&      
-        <ul>
-          {phoneNumber && <li key="phoneNumber">{phoneNumber}</li>}
-          {emailAddress &&<li key="emailAddress"><a href={`mailto:${emailAddress}`}>{emailAddress}</a></li>}
-          {website && <li key="website"><a href={website} className="website">{website}</a></li>}
-        </ul>
-      }
+      <ul>
+        <li><h3>{info['name'] ? info['name'] : 'Full Name'}</h3></li>
+        {info['subtitle'] && <li><h4>{info['subtitle']}</h4></li>}
+      </ul>
+
+      {(info['phone'] || info['email'] || info['website'] || info['location']) &&      
+      <ul>
+        {info['phone'] && <li key="phone">{info['phone']}</li>}
+        {info['email'] &&<li key="email"><a href={`mailto:${info['email']}`}>{info.email}</a></li>}
+        {info['website'] && <li key="website"><a href={info['website']}>{info['website']}</a></li>}
+        {info['location'] && <li key="location">{info['location']}</li>}
+      </ul>}
       </>
     )
   }
@@ -44,17 +43,11 @@ const Personal = () => {
   const EditForm = () => {
     return (
       <>
-      <EditPersonalForm 
-        name={name}
-        setName={setName}
-        phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
-        emailAddress={emailAddress}
-        setEmailAddress={setEmailAddress}
-        website={website}
-        setWebsite={setWebsite}
+      <EditPersonalForm
+        info={info}
+        setInfo={setInfo}
       />
-      <button type="button" className="mode" onClick={() => setIsEditing(false)}>Save</button>
+      <button type="button" className="mode" onClick={() => handleUpdateDetails()}>Save</button>
       </>
     )
   }
