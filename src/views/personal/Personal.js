@@ -16,11 +16,6 @@ const Personal = () => {
     }
   );
 
-  const handleUpdateDetails = () => {
-    localStorage.setItem('info', JSON.stringify(info));
-    setIsEditing(false);
-  }
-
   const PersonalDetails = () => {
     return (
       <>
@@ -42,13 +37,11 @@ const Personal = () => {
 
   const EditForm = () => {
     return (
-      <>
       <EditPersonalForm
         info={info}
         setInfo={setInfo}
+        setIsEditing={setIsEditing}
       />
-      <button type="button" className="mode" onClick={() => handleUpdateDetails()}>Save</button>
-      </>
     )
   }
 
