@@ -1,5 +1,6 @@
 import { useState } from "react";
 import checkPopulated from "../../checkPopulated";
+import { v4 as uuid } from "uuid";
 
 const EditProjectForm = ({
   project, projects, setProjects,
@@ -25,7 +26,7 @@ const EditProjectForm = ({
     return (
       tempProject['process'].map((bullet, index) => (
         <input
-          key={`${tempProject.id}${index}`}
+          key={`${tempProject.id}${uuid()}`}
           value={bullet}
           onChange={(e) => handleUpdateBullet(e.target.value, index)}
         />
@@ -100,24 +101,24 @@ const EditProjectForm = ({
       <section className="form-container">
         <label htmlFor="title" tabIndex={-1}>Project Title</label>
         <input
+          autoFocus
           type="text"
           name="title"
           id="title"
-          autoFocus
+          maxLength="30"
+          placeholder="Project Title"
           value={tempProject['title']}
           onChange={(e) => setTempProject({...tempProject, title: e.target.value })}
-          placeholder="Project Title"
-          maxLength="20"
         />
         <label htmlFor="tags" tabIndex={-1}>Project Tags</label>
         <input
           type="text"
           name="tags"
           id="tags"
+          maxLength="100"
+          placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
           value={tempProject['tags']}
           onChange={(e) => handleUpdateTags(e)}
-          placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
-          maxLength="60"
         />
         {/* Date input */}
         <label htmlFor="year" tabIndex={-1}>Date</label>
@@ -125,10 +126,10 @@ const EditProjectForm = ({
           type="text"
           name="year"
           id="year"
+          maxLength="20"
+          placeholder="Date of Project"
           value={tempProject['year']}
           onChange={(e) => setTempProject({...tempProject, year: e.target.value})}
-          placeholder="Date of Project"
-          maxLength="20"
         />
         {/* URL input */}
         <label htmlFor="url" tabIndex={-1}>Live Url</label>
@@ -136,10 +137,10 @@ const EditProjectForm = ({
           type="text"
           name="url"
           id="url"
-          maxLength="35"
+          maxLength="60"
+          placeholder="Live URL"
           value={tempProject['url']}
           onChange={(e) => setTempProject({...tempProject, url: e.target.value})}
-          placeholder="Live URL"
         />
         {/* Github URL input */}
         <label htmlFor="github" tabIndex={-1}>GitHub Url</label>
@@ -147,16 +148,15 @@ const EditProjectForm = ({
           type="text"
           name="github"
           id="github"
-          maxLength="35"
+          maxLength="60"
+          placeholder="GitHub URL"
           value={tempProject['github']}
           onChange={(e) => setTempProject({...tempProject, github: e.target.value})}
-          placeholder="GitHub URL"
         />
         <fieldset className="info">
           <legend>Project Information</legend>
           <label className="visible" htmlFor="bullet">Bullet Points
             <input
-              key={`${project.id}0`}
               type="radio"
               id="bullet"
               name="toggle"
@@ -167,7 +167,6 @@ const EditProjectForm = ({
           </label>
           <label className="visible" htmlFor="description">Paragraph
             <input
-              key={`${project.id}1`}
               type="radio"
               id="description"
               name="toggle"

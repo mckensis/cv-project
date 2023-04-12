@@ -49,7 +49,7 @@ const EditWorkForm = ({
           type="text"
           name="job"
           id="job"
-          maxLength="30"
+          maxLength="40"
           placeholder="Job Title"
           value={tempWork['title']}
           onChange={(e) => setTempWork({...tempWork, title: e.target.value})}

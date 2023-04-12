@@ -19,7 +19,7 @@ const EditAboutForm = ({ details, setDetails, setIsEditing, updatePreferences })
         value={details}
         onChange={(e) => setDetails(e.target.value)}
         placeholder="Enter information about yourself here"
-        maxLength="300"
+        maxLength="1000"
       />
       <button type="button" className="remove" onClick={() => handleDeleteSection()}>Delete</button>
       <button type="submit" className="mode">Save</button>

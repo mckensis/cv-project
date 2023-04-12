@@ -89,6 +89,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
     setProjects(updatedProjects);
     localStorage.setItem('projects', JSON.stringify(updatedProjects));
     setNewProjectFormVisible(false);
+    console.log(updatedProjects);
   }
 
   return (
@@ -100,7 +101,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           type="text"
           id="title"
           name="title"
-          maxLength="20"
+          maxLength="30"
           placeholder="Project Title"
           value={newProject['title']}
           onChange={(e) => setNewProject({...newProject, title: e.target.value })}
@@ -110,10 +111,10 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           type="text"
           name="tags"
           id="tags"
+          maxLength="100"
+          placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
           value={newProject['tags']}
           onChange={(e) => handleUpdateTags(e)}
-          placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
-          maxLength="60"
         />
         <label htmlFor="year" tabIndex={-1}>Date of Project</label>
         <input
@@ -121,16 +122,16 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           name="year"
           id="year"
           maxLength="20"
+          placeholder="Date of Project"
           value={newProject['year']}
           onChange={(e) => setNewProject({...newProject, year: e.target.value})}
-          placeholder="Date of Project"
         />
         <label htmlFor="url" tabIndex={-1}>Live Url</label>
         <input
           type="text"
           name="url"
           id="url"
-          maxLength="35"
+          maxLength="60"
           placeholder="Live URL"
           value={newProject['url']}
           onChange={(e) => setNewProject({...newProject, url: e.target.value})}
@@ -140,7 +141,7 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           type="text"
           name="github"
           id="github"
-          maxLength="35"
+          maxLength="60"
           placeholder="GitHub URL"
           value={newProject['github']}
           onChange={(e) => setNewProject({...newProject, github: e.target.value})}
@@ -150,7 +151,6 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           <legend>Project Information</legend>
           <label className="visible" htmlFor="bullet">Bullet Points
             <input
-              key={`${newProject.id}${uuid()}`}
               type="radio"
               id="bullet"
               name="toggle"
@@ -161,7 +161,6 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
           </label>
           <label className="visible" htmlFor="description">Paragraph
             <input
-              key={`${newProject.id}${uuid()}`}
               type="radio"
               id="description"
               name="toggle"
