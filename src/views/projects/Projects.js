@@ -14,6 +14,14 @@ const Projects = ({ updatePreferences }) => {
       id: uuid(),
       year: '2022 - 2023',
       title: 'Project One',
+      tags: ["React", "Jest", "Node", "Express"],
+      display: 'bullet',
+      process: [
+        "I designed and built this CRUD application in order to prioritise tasks and categorise them into lists",
+        "CRUD functionality allows creation, editing, and deletion of lists and tasks",
+        "Used localStorage to store data between sessions",
+        "Utilised Webpack to bundle all files into a miniature file size and organise my code"
+      ],
       description: `This is where I will put a description of this project, making sure to include the frameworks and languages I used such as React and Jest. I would talk about the development process and the challenges I faced during development, and how I overcame them.`,
       url: 'https://mckensis.github.io/',
       github: 'https://github.com/mckensis/'
@@ -22,6 +30,8 @@ const Projects = ({ updatePreferences }) => {
       id: uuid(),
       year: '2021',
       title: 'Project Two',
+      tags: ['Java', 'C++', 'Python'],
+      display: 'description',
       description: `This is where I would put information about a second project.`,
       url: 'https://mckensis.github.io/',
       github: 'https://github.com/mckensis/'

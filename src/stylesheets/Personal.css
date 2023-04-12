@@ -48,6 +48,6 @@ form.personal-details {
   margin: 0;
   display: flex;
   flex-grow: 1;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 }

@@ -6,6 +6,32 @@ const EditProjectForm = ({
   countEditing, setCountEditing, setIsEditingProjectArticle }) => {
 
   const [tempProject, setTempProject] = useState({ ...project });
+  const [newBullet, setNewBullet] = useState('');
+
+  const TextArea = () => {
+    return <textarea
+      name="description"
+      id="description"
+      value={tempProject['description']}
+      onChange={(e) => setTempProject({...tempProject, description: e.target.value})}
+      placeholder="Description of the Project"
+      minLength="1"
+      maxLength="500" />
+  }
+
+  const BulletPoints = () => {
+    if (!tempProject['process']) return;
+  
+    return (
+      tempProject['process'].map((bullet, index) => (
+        <input
+          key={`${tempProject.id}${index}`}
+          value={bullet}
+          onChange={(e) => handleUpdateBullet(e.target.value, index)}
+        />
+        ))
+    ) 
+  };
 
   const handleDelete = () => {
     const count = countEditing - 1;
@@ -40,84 +66,146 @@ const EditProjectForm = ({
     localStorage.setItem('projects', JSON.stringify(projects));
   }
 
+  const handleToggleView = (e) => {
+    setTempProject({...tempProject, display: e.target.value});
+  }
+
+  const handleUpdateTags = (e) => {
+    const newTags = e.target.value.split(',');
+    setTempProject({...project, tags: newTags});
+  }
+
+  const handleUpdateBullet = (value, index) => {
+    const tempProcess = [...tempProject.process];
+    tempProcess[index] = value;
+    setTempProject({...tempProject, process: tempProcess.filter(content => content !== '')});
+  }
+
+  const handleAddNewBullet = () => {
+    let bullets;
+
+    if (!newBullet) return;
+    
+    if (!tempProject['process']) {
+      tempProject['process'] = [];
+    }
+
+    bullets = [...tempProject['process']];    
+    bullets.push(newBullet);
+    setTempProject({...tempProject, process: bullets});
+  }
+
   return (
     <form className="edit" onSubmit={(e) => e.preventDefault()}>
       <section className="form-container">
-      {/* Title input */}
-      <label htmlFor="job" tabIndex={-1}>Project Title</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        value={tempProject['title']}
-        onChange={(e) => setTempProject({...tempProject, title: e.target.value })}
-        placeholder="Project Title"
-        maxLength="20"
-      />
-      {/* Date input */}
-      <label htmlFor="year" tabIndex={-1}>Date</label>
-      <input
-        type="text"
-        name="year"
-        id="year"
-        value={tempProject['year']}
-        onChange={(e) => setTempProject({...tempProject, year: e.target.value})}
-        autoFocus
-        placeholder="Date of Project"
-        maxLength="18"
-      />
-      {/* URL input */}
-      <label htmlFor="url" tabIndex={-1}>Live Url</label>
-      <input
-        type="text"
-        name="url"
-        id="url"
-        maxLength="35"
-        value={tempProject['url']}
-        onChange={(e) => setTempProject({...tempProject, url: e.target.value})}
-        placeholder="Live URL"
-      />
-      {/* Github URL input */}
-      <label htmlFor="github" tabIndex={-1}>GitHub Url</label>
-      <input
-        type="text"
-        name="github"
-        id="github"
-        maxLength="35"
-        value={tempProject['github']}
-        onChange={(e) => setTempProject({...tempProject, github: e.target.value})}
-        placeholder="GitHub URL"
-      />
-      {/* Description input */}
-      <label htmlFor="description" tabIndex={-1}>Description</label>
-      <textarea
-        name="description"
-        id="description"
-        value={tempProject['description']}
-        onChange={(e) => setTempProject({...tempProject, description: e.target.value})}
-        placeholder="Description of the Project"
-        minLength="1"
-        maxLength="500"
-      >
-      </textarea>
-        </section>
-        <section className="button-container">
-          <button
-            className="cancel"
-            type="button"
-            onClick={() => handleDelete()}
-          >
-            Delete
-          </button>
-          
-          <button
-            className="submit"
-            type="button"
-            onClick={() => handleSave()}
-          >
-            Save
-          </button>
-        </section>
+        <label htmlFor="title" tabIndex={-1}>Project Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          autoFocus
+          value={tempProject['title']}
+          onChange={(e) => setTempProject({...tempProject, title: e.target.value })}
+          placeholder="Project Title"
+          maxLength="20"
+        />
+        <label htmlFor="tags" tabIndex={-1}>Project Tags</label>
+        <input
+          type="text"
+          name="tags"
+          id="tags"
+          value={tempProject['tags']}
+          onChange={(e) => handleUpdateTags(e)}
+          placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
+          maxLength="60"
+        />
+        {/* Date input */}
+        <label htmlFor="year" tabIndex={-1}>Date</label>
+        <input
+          type="text"
+          name="year"
+          id="year"
+          value={tempProject['year']}
+          onChange={(e) => setTempProject({...tempProject, year: e.target.value})}
+          placeholder="Date of Project"
+          maxLength="20"
+        />
+        {/* URL input */}
+        <label htmlFor="url" tabIndex={-1}>Live Url</label>
+        <input
+          type="text"
+          name="url"
+          id="url"
+          maxLength="35"
+          value={tempProject['url']}
+          onChange={(e) => setTempProject({...tempProject, url: e.target.value})}
+          placeholder="Live URL"
+        />
+        {/* Github URL input */}
+        <label htmlFor="github" tabIndex={-1}>GitHub Url</label>
+        <input
+          type="text"
+          name="github"
+          id="github"
+          maxLength="35"
+          value={tempProject['github']}
+          onChange={(e) => setTempProject({...tempProject, github: e.target.value})}
+          placeholder="GitHub URL"
+        />
+        <fieldset className="info">
+          <legend>Project Information</legend>
+          <label className="visible" htmlFor="bullet">Bullet Points
+            <input
+              key={`${project.id}0`}
+              type="radio"
+              id="bullet"
+              name="toggle"
+              value="bullet"
+              checked={tempProject['display'] === 'bullet'}
+              onChange={(e) => handleToggleView(e)}
+            />
+          </label>
+          <label className="visible" htmlFor="description">Paragraph
+            <input
+              key={`${project.id}1`}
+              type="radio"
+              id="description"
+              name="toggle"
+              value="description"
+              checked={tempProject['display'] === 'description'}
+              onChange={(e) => handleToggleView(e)}
+            />
+          </label>
+          {tempProject['display'] === 'description' && <>
+            <label htmlFor="description" tabIndex={-1}>Description</label>
+            {TextArea()}
+          </>}
+          {tempProject['display'] === 'bullet' && <>
+            {BulletPoints()}
+          </>}
+        </fieldset>
+      </section>
+      {tempProject['display'] === 'bullet' && <section className="new-bullet">
+        <input type="text" placeholder="New Bullet Point" value={newBullet} onChange={(e) => setNewBullet(e.target.value)} maxLength="120" />
+        <button type="button" className="add" onClick={() => handleAddNewBullet()} disabled={newBullet ? null : true}>Add Bullet Point</button>
+      </section>}
+      <section className="button-container">
+        <button
+          className="cancel"
+          type="button"
+          onClick={() => handleDelete()}
+        >
+          Delete
+        </button>
+        
+        <button
+          className="submit"
+          type="button"
+          onClick={() => handleSave()}
+        >
+          Save
+        </button>
+      </section>
     </form>
   )
 }

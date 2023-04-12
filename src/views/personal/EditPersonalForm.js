@@ -1,4 +1,5 @@
 const EditPersonalForm = ({ info, setInfo, setIsEditing }) => {  
+  
   const handleUpdateDetails = () => {
     localStorage.setItem('info', JSON.stringify(info));
     setIsEditing(false);
