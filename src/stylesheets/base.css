@@ -5,8 +5,9 @@
 }
 
 :root {
-  --primary-color: #456990;
-  --highlight-color: #efefef;
+  --primary-color: #168253;
+  --highlight-color: #d0e1ca;
+  --secondary-highlight-color: #ecf5ed;
 }
 
 * {
@@ -65,6 +66,7 @@ h1 {
 }
 
 main {
+  font-family: 'Calibri';
   display: grid;
   width: 80vw;
   max-width: 210mm;
@@ -290,14 +292,14 @@ section:not(section.education) > article:nth-of-type(odd){
 }
 
 section:not(section.education) > article:nth-of-type(even){
-  background-color: lightgrey;
+  background-color: var(--secondary-highlight-color);
 }
 
 section:not(section.education) > article:nth-of-type(even) form {
   background-color: transparent;
 }
 
-section > article {
+section > article:not(section.education > article) {
   padding: 0.5rem;
 }
 

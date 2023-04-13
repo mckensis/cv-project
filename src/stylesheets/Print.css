@@ -1,13 +1,15 @@
 @media print {
 
   * {
-    font-size: 10pt;
+    font-family: 'Open Sans', 'Calibri', 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+    font-size: 9pt;
   }
 
   header {
     display: none;
   }
 
+  /* The content which will be printed */
   main {
     width: unset;
     max-width: unset;
@@ -16,8 +18,6 @@
     margin: auto;
     padding: 0.25rem;
     width: 100%;
-    font-family: sans-serif;
-    font-size: 10pt;
     box-shadow: none;
     overflow: hidden;
   }
@@ -26,12 +26,35 @@
     display: none;
   }
 
+  /* Section Headings */
   h2 {
-    margin: 4pt 0 0 0;
-    padding: 2pt 0 2pt 0;
-    font-size: 16pt;
+    font-size: 14pt;
+    margin: 6pt 0 0pt 0;
+    padding: 0 0 2pt 0;
   }
 
+  /* Name */
+  .personal h3 {
+    font-weight: 700;
+    font-size: 20pt;
+  }
+
+  /* Subtitle */
+  .personal h4 {
+    font-size: 14pt;
+  }
+
+  /* Project Title */
+  .projects h3 {
+    font-size: 10pt;
+  }
+
+  /* View live / View code */
+  .projects a {
+    font-size: 7pt;
+  }
+
+  /* All links */
   a,
   a:visited,
   a:active {
@@ -40,69 +63,70 @@
     color: black;
   }
 
+  /* About Me Paragraph */
   .about > p {
-    line-height: 11pt;
-    font-size: 9pt;
+    line-height: 12pt;
   }
 
   .personal ul:nth-of-type(2) {
-    font-size: 9pt;
     line-height: 12pt;
   }
 
   .personal {
-    margin-bottom: 0;
+    margin-bottom: 0pt;
   }
 
   .personal a {
     text-decoration: none;
   }
 
-  .personal h3 {
-    font-size: 22pt;
-  }
-
-  .personal h4 {
-    font-style: italic;
-    font-size: 16pt;
-  }
-
   .work-article {
     grid-template-columns: minmax(120px, min-content) 1fr;
   }
 
+  /* Job Title, Company, Date */
   .work ul {
     font-size: 9pt;
   }
 
+  .project-article {
+    padding: 0.25rem;
+  }
+
+  /* Project Title & Year section */
   .project-info {
     display: flex;
-    column-gap: 6pt;
+    column-gap: 4pt;
     align-items: center;
   }
 
-  .project-info h3 {
-    font-size: 12pt;
-    line-height: 14pt;
-  }
-
+  /* Project paragraph */
   .project-info > p {
     font-size: 9pt;
     line-height: 12pt;
   }
 
   .education li {
-    font-size: 9pt;
+    font-size: 8pt;
+  }
+
+  .education li:nth-of-type(1) {
+    min-width: 120px;
   }
 
   ul.tags {
     font-style: italic;
     font-size: 8pt;
-    margin-top: 0pt;
-    margin-bottom: 4pt;
+    margin-top: 2pt;
+    margin-bottom: 2pt;
   }
 
-  ul.process {
-    font-size: 9pt;
+  ul.process li {
+    font-size: 8pt;
+    list-style: none;
   }
+
+  ul.process li:before{ content:"•"; font-size:8pt; padding-right: 0.25rem; }
+
+
 }

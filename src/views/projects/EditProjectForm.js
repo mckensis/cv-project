@@ -36,7 +36,6 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
   const handleDeleteProject = () => {
     const count = countEditing - 1;
     setCountEditing(count);
-    console.log(projects.filter(element => element.id !== project.id));
     setProjects(projects.filter(element => element.id !== project.id));
     localStorage.setItem('projects', JSON.stringify(projects.filter(element => element.id !== project.id)));
   }
@@ -51,10 +50,8 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
   }
 
   const handleSave = () => {
-    console.log(checkPopulated(updatedProject));
     // Delete the project if all fields are blank
     if (!checkPopulated(updatedProject)) {
-      console.log("in");
       handleDeleteProject();
       return;
     }
@@ -80,7 +77,6 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
     setIsEditingProjectArticle(false);
     setCountEditing(count);
     localStorage.setItem('projects', JSON.stringify(projects));
-    console.log(projects);
   }
   
   const TextArea = () => {

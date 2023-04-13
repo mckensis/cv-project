@@ -21,7 +21,7 @@ const Personal = () => {
       <>
       <ul>
         <li><h3>{info['name'] ? info['name'] : 'Full Name'}</h3></li>
-        {info['subtitle'] && <li><h4>{info['subtitle']}</h4></li>}
+        {info['subtitle'] && <li className="secondary"><h4>{info['subtitle']}</h4></li>}
       </ul>
 
       {(info['phone'] || info['email'] || info['website'] || info['location']) &&      
