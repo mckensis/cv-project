@@ -1,100 +1,108 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import checkPopulated from "../../checkPopulated";
 import { v4 as uuid } from "uuid";
 
-const EditProjectForm = ({
-  project, projects, setProjects,
-  countEditing, setCountEditing, setIsEditingProjectArticle }) => {
+const EditProjectForm = ({ project, projects, setProjects, countEditing, setCountEditing, setIsEditingProjectArticle }) => {
 
-  const [tempProject, setTempProject] = useState({ ...project });
+  const inputRef = useRef();
+
   const [newBullet, setNewBullet] = useState('');
+  const [updatedProject, setUpdatedProject] = useState({...project});
 
-  const TextArea = () => {
-    return <textarea
-      name="description"
-      id="description"
-      value={tempProject['description']}
-      onChange={(e) => setTempProject({...tempProject, description: e.target.value})}
-      placeholder="Description of the Project"
-      minLength="1"
-      maxLength="500" />
+  const handleToggleView = (e) => {
+    setUpdatedProject({...updatedProject, display: e.target.value});
   }
 
-  const BulletPoints = () => {
-    if (!tempProject['process']) return;
-  
-    return (
-      tempProject['process'].map((bullet, index) => (
-        <input
-          key={`${tempProject.id}${uuid()}`}
-          value={bullet}
-          onChange={(e) => handleUpdateBullet(e.target.value, index)}
-        />
-        ))
-    ) 
-  };
+  const handleUpdateTags = (e) => {
+    const newTags = e.target.value.split(',');
+    setUpdatedProject({...updatedProject, tags: newTags});
+  }
 
-  const handleDelete = () => {
+  const handleUpdateBullet = (value, index) => {
+    const tempProcess = [...updatedProject.process];
+    
+    //Remove the data from the project
+    if (!value) {
+      tempProcess.splice(index, 1);
+      setUpdatedProject({...updatedProject, process: tempProcess});
+      return;
+    }
+    
+    tempProcess[index]['value'] = value;
+    setUpdatedProject({...updatedProject, process: tempProcess});
+  }
+
+  const handleDeleteProject = () => {
     const count = countEditing - 1;
     setCountEditing(count);
-    setProjects(projects.filter(element => element.id !== tempProject.id));
-    localStorage.setItem('projects', JSON.stringify(projects.filter(element => element.id !== tempProject.id)));
+    setProjects(projects.filter(element => element.id !== project.id));
+    localStorage.setItem('projects', JSON.stringify(projects.filter(element => element.id !== project.id)));
+  }
+  
+  const handleAddNewBullet = () => {
+    if (!newBullet) return;
+    if (!updatedProject['process']) updatedProject['process'] = [];
+    const bullets = [...updatedProject['process'], { id: uuid(), value: newBullet }];
+    setUpdatedProject({...updatedProject, process: bullets});
+    setNewBullet('');
+    inputRef.current.focus();
   }
 
   const handleSave = () => {
     //Get the project to be edited
-    const foundProject = projects.find((item) => item.id === tempProject.id);
-    if (!foundProject) {
-      return;
-    }
+    const foundProject = projects.find((item) => item.id === project.id);
+    if (!foundProject) return;
 
-    if (!checkPopulated(tempProject)) {
-      handleDelete();
+    if (!checkPopulated(updatedProject)) {
+      handleDeleteProject();
       return;
     }
     
     // Update the value within the object key if the new value is different
     for (let item of Object.keys(foundProject)) {
-      if (item !== 'id' && foundProject[item] !== tempProject[item]) {
-        foundProject[item] = tempProject[item];
+      if (item !== 'id' && foundProject[item] !== updatedProject[item]) {
+        foundProject[item] = updatedProject[item];
       }
     }
 
+    const tempProjects = [...projects];
+    const updatedProjects = tempProjects.map((pro) => (
+      pro.id === updatedProject.id ? pro = updatedProject : pro
+    ));
+
     const count = countEditing - 1;
-    setProjects(projects);
+    setProjects(updatedProjects);
     setIsEditingProjectArticle(false);
     setCountEditing(count);
     localStorage.setItem('projects', JSON.stringify(projects));
   }
+  
+  const TextArea = () => {
+    return <>
+      <label htmlFor="description" tabIndex={-1}>Description</label>
+      <textarea
+        name="description"
+        id="description"
+        value={updatedProject['description']}
+        onChange={(e) => setUpdatedProject({...updatedProject, description: e.target.value})}
+        placeholder="Description of the Project"
+        maxLength="500"
+      />
+    </>
+  };
 
-  const handleToggleView = (e) => {
-    setTempProject({...tempProject, display: e.target.value});
-  }
-
-  const handleUpdateTags = (e) => {
-    const newTags = e.target.value.split(',');
-    setTempProject({...project, tags: newTags});
-  }
-
-  const handleUpdateBullet = (value, index) => {
-    const tempProcess = [...tempProject.process];
-    tempProcess[index] = value;
-    setTempProject({...tempProject, process: tempProcess.filter(content => content !== '')});
-  }
-
-  const handleAddNewBullet = () => {
-    let bullets;
-
-    if (!newBullet) return;
-    
-    if (!tempProject['process']) {
-      tempProject['process'] = [];
-    }
-
-    bullets = [...tempProject['process']];    
-    bullets.push(newBullet);
-    setTempProject({...tempProject, process: bullets});
-  }
+  const BulletPoints = () => {
+    if (!updatedProject['process']) return;
+    return (
+      updatedProject['process'].map((bullet, index) => (
+        <input
+          key={bullet.id}
+          value={bullet.value}
+          onChange={(e) => handleUpdateBullet(e.target.value, index)}
+        />
+        ))
+    ) 
+  };
 
   return (
     <form className="edit" onSubmit={(e) => e.preventDefault()}>
@@ -107,8 +115,8 @@ const EditProjectForm = ({
           id="title"
           maxLength="30"
           placeholder="Project Title"
-          value={tempProject['title']}
-          onChange={(e) => setTempProject({...tempProject, title: e.target.value })}
+          value={updatedProject['title']}
+          onChange={(e) => setUpdatedProject({...updatedProject, title: e.target.value })}
         />
         <label htmlFor="tags" tabIndex={-1}>Project Tags</label>
         <input
@@ -117,7 +125,7 @@ const EditProjectForm = ({
           id="tags"
           maxLength="100"
           placeholder="Enter tags here seperated by a comma followed by a space eg. 'React, Jest, Node'"
-          value={tempProject['tags']}
+          value={updatedProject['tags']}
           onChange={(e) => handleUpdateTags(e)}
         />
         {/* Date input */}
@@ -128,8 +136,8 @@ const EditProjectForm = ({
           id="year"
           maxLength="20"
           placeholder="Date of Project"
-          value={tempProject['year']}
-          onChange={(e) => setTempProject({...tempProject, year: e.target.value})}
+          value={updatedProject['year']}
+          onChange={(e) => setUpdatedProject({...updatedProject, year: e.target.value})}
         />
         {/* URL input */}
         <label htmlFor="url" tabIndex={-1}>Live Url</label>
@@ -139,8 +147,8 @@ const EditProjectForm = ({
           id="url"
           maxLength="60"
           placeholder="Live URL"
-          value={tempProject['url']}
-          onChange={(e) => setTempProject({...tempProject, url: e.target.value})}
+          value={updatedProject['url']}
+          onChange={(e) => setUpdatedProject({...updatedProject, url: e.target.value})}
         />
         {/* Github URL input */}
         <label htmlFor="github" tabIndex={-1}>GitHub Url</label>
@@ -150,8 +158,8 @@ const EditProjectForm = ({
           id="github"
           maxLength="60"
           placeholder="GitHub URL"
-          value={tempProject['github']}
-          onChange={(e) => setTempProject({...tempProject, github: e.target.value})}
+          value={updatedProject['github']}
+          onChange={(e) => setUpdatedProject({...updatedProject, github: e.target.value})}
         />
         <fieldset className="info">
           <legend>Project Information</legend>
@@ -161,7 +169,7 @@ const EditProjectForm = ({
               id="bullet"
               name="toggle"
               value="bullet"
-              checked={tempProject['display'] === 'bullet'}
+              checked={updatedProject['display'] === 'bullet'}
               onChange={(e) => handleToggleView(e)}
             />
           </label>
@@ -171,28 +179,28 @@ const EditProjectForm = ({
               id="description"
               name="toggle"
               value="description"
-              checked={tempProject['display'] === 'description'}
+              checked={updatedProject['display'] === 'description'}
               onChange={(e) => handleToggleView(e)}
             />
           </label>
-          {tempProject['display'] === 'description' && <>
+          {updatedProject['display'] === 'description' && <>
             <label htmlFor="description" tabIndex={-1}>Description</label>
             {TextArea()}
           </>}
-          {tempProject['display'] === 'bullet' && <>
+          {updatedProject['display'] === 'bullet' && <>
             {BulletPoints()}
           </>}
         </fieldset>
       </section>
-      {tempProject['display'] === 'bullet' && <section className="new-bullet">
-        <input type="text" placeholder="New Bullet Point" value={newBullet} onChange={(e) => setNewBullet(e.target.value)} maxLength="120" />
+      {updatedProject['display'] === 'bullet' && <section className="new-bullet">
+        <input type="text" ref={inputRef} placeholder="New Bullet Point" value={newBullet} onChange={(e) => setNewBullet(e.target.value)} maxLength="120" />
         <button type="button" className="add" onClick={() => handleAddNewBullet()} disabled={newBullet ? null : true}>Add Bullet Point</button>
       </section>}
       <section className="button-container">
         <button
           className="cancel"
           type="button"
-          onClick={() => handleDelete()}
+          onClick={() => handleDeleteProject()}
         >
           Delete
         </button>

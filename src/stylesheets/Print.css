@@ -1,4 +1,9 @@
 @media print {
+
+  * {
+    font-size: 10pt;
+  }
+
   header {
     display: none;
   }

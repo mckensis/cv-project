@@ -39,7 +39,7 @@ const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditin
         {(project['display'] === 'bullet') && project['process'] && 
           <ul className="process">
             {project['process'].map((item) => (
-              <li key={`${project['id']}${uuid()}`}>{item}</li>
+              <li key={item.id}>{item.value}</li>
             ))}
           </ul>
         }

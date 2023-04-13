@@ -30,23 +30,30 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
 
   const handleUpdateBullet = (value, index) => {
     const tempProcess = [...newProject.process];
-    tempProcess[index] = value;
-    setNewProject({...newProject, process: tempProcess.filter(content => content !== '')});
+    
+    //Remove the data from the project
+    if (!value) {
+      tempProcess.splice(index, 1);
+      setNewProject({...newProject, process: tempProcess});
+      return;
+    }
+    
+    tempProcess[index]['value'] = value;
+    setNewProject({...newProject, process: tempProcess});
   }
 
   const handleAddNewBullet = () => {
     let bullets;
-
+    
     if (!newBullet) return;
     
-    if (!newProject['process']) {
-      newProject['process'] = [];
-    }
+    if (!newProject['process']) newProject['process'] = [];
 
-    bullets = [...newProject['process']];    
-    bullets.push(newBullet);
+    bullets = [...newProject['process'], { id: uuid(), value: newBullet }];
+    
     setNewProject({...newProject, process: bullets});
     setNewBullet('');
+    
     inputRef.current.focus();
   }
 
@@ -70,8 +77,8 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
     return (
       newProject['process'].map((bullet, index) => (
         <input
-          key={`${newProject.id}${uuid()}`}
-          value={bullet}
+          key={bullet.id}
+          value={bullet.value}
           onChange={(e) => handleUpdateBullet(e.target.value, index)}
         />
         ))
@@ -89,7 +96,6 @@ const NewProjectForm = ({ projects, setProjects, setNewProjectFormVisible }) => 
     setProjects(updatedProjects);
     localStorage.setItem('projects', JSON.stringify(updatedProjects));
     setNewProjectFormVisible(false);
-    console.log(updatedProjects);
   }
 
   return (
