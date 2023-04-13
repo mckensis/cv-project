@@ -14,7 +14,8 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
   }
 
   const handleUpdateTags = (e) => {
-    const newTags = e.target.value.split(',');
+    let newTags = e.target.value.split(',');
+    if (e.target.value.length === 0) newTags = [];
     setUpdatedProject({...updatedProject, tags: newTags});
   }
 
@@ -35,6 +36,7 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
   const handleDeleteProject = () => {
     const count = countEditing - 1;
     setCountEditing(count);
+    console.log(projects.filter(element => element.id !== project.id));
     setProjects(projects.filter(element => element.id !== project.id));
     localStorage.setItem('projects', JSON.stringify(projects.filter(element => element.id !== project.id)));
   }
@@ -49,14 +51,17 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
   }
 
   const handleSave = () => {
-    //Get the project to be edited
-    const foundProject = projects.find((item) => item.id === project.id);
-    if (!foundProject) return;
-
+    console.log(checkPopulated(updatedProject));
+    // Delete the project if all fields are blank
     if (!checkPopulated(updatedProject)) {
+      console.log("in");
       handleDeleteProject();
       return;
     }
+
+    //Get the project to be edited
+    const foundProject = projects.find((item) => item.id === project.id);
+    if (!foundProject) return;
     
     // Update the value within the object key if the new value is different
     for (let item of Object.keys(foundProject)) {
@@ -75,6 +80,7 @@ const EditProjectForm = ({ project, projects, setProjects, countEditing, setCoun
     setIsEditingProjectArticle(false);
     setCountEditing(count);
     localStorage.setItem('projects', JSON.stringify(projects));
+    console.log(projects);
   }
   
   const TextArea = () => {
