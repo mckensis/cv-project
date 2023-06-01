@@ -33,6 +33,16 @@
     padding: 0 0 2pt 0;
   }
 
+  .personal {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0pt;
+  }
+
+  .personal a {
+    text-decoration: none;
+  }
+
   /* Name */
   .personal h3 {
     font-weight: 700;
@@ -42,6 +52,16 @@
   /* Subtitle */
   .personal h4 {
     font-size: 14pt;
+  }
+
+  .personal ul:nth-of-type(2) {
+    line-height: 12pt;
+    align-items: flex-end;
+  }
+
+  /* About Me Paragraph */
+  .about > p {
+    line-height: 11.5pt;
   }
 
   /* Project Title */
@@ -61,23 +81,6 @@
     font: inherit;
     text-decoration: 1px solid underline;
     color: black;
-  }
-
-  /* About Me Paragraph */
-  .about > p {
-    line-height: 11.5pt;
-  }
-
-  .personal ul:nth-of-type(2) {
-    line-height: 12pt;
-  }
-
-  .personal {
-    margin-bottom: 0pt;
-  }
-
-  .personal a {
-    text-decoration: none;
   }
 
   .work-article {
@@ -135,7 +138,11 @@
     list-style: none;
   }
 
-  ul.process li:before{ content:"•"; font-size:8pt; padding-right: 0.25rem; }
+  ul.process li:before { 
+    content:"•";
+    font-size:8pt;
+    padding-right: 0.25rem;
+  }
 
 
 }

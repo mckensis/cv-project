@@ -7,6 +7,7 @@ import './stylesheets/Personal.css';
 import './stylesheets/Projects.css';
 import './stylesheets/Skills.css';
 import './stylesheets/Work.css';
+import './stylesheets/mobile.css';
 import './stylesheets/Print.css';
 
 function App() {
