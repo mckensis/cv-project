@@ -18,12 +18,16 @@
     flex-flow: column;
   }
 
+  .personal ul:nth-of-type(1) {
+    margin-left: 0;
+  }
+
   .personal ul:nth-of-type(2) {
     align-items: flex-start;
   }
 
   ul.tags {
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
 
   .work-article {
@@ -41,6 +45,14 @@
     left: 0;
     width: 100vw;
     border-radius: 0;
+  }
+
+  .education-article ul {
+    flex-direction: column;
+  }
+
+  .education-article ul :nth-child(3) {
+    text-align: left;
   }
   
 }

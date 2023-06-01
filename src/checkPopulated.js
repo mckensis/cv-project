@@ -1,5 +1,6 @@
-//Check that an object isn't empty
-//Ignores the id field
+// Check that an object isn't empty
+// Ignores the id field
+// Used for deleting empty CV sections upon saving
 const checkPopulated = (obj) => {
 
   for (const [key, value] of Object.entries(obj)) {
