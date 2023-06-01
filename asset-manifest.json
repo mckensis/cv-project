@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/cv-project/static/css/main.2606ad3b.css",
+    "main.css": "/cv-project/static/css/main.1b3317d3.css",
     "main.js": "/cv-project/static/js/main.710802be.js",
     "static/media/Calibri.woff": "/cv-project/static/media/Calibri.b79e6a3ae8c63fb5b57b.woff",
     "static/media/Calibri.woff2": "/cv-project/static/media/Calibri.6d82cfabc309b9253a36.woff2",
     "index.html": "/cv-project/index.html",
-    "main.2606ad3b.css.map": "/cv-project/static/css/main.2606ad3b.css.map",
+    "main.1b3317d3.css.map": "/cv-project/static/css/main.1b3317d3.css.map",
     "main.710802be.js.map": "/cv-project/static/js/main.710802be.js.map"
   },
   "entrypoints": [
-    "static/css/main.2606ad3b.css",
+    "static/css/main.1b3317d3.css",
     "static/js/main.710802be.js"
   ]
 }
