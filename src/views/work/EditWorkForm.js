@@ -78,7 +78,7 @@ const EditWorkForm = ({
         <textarea
           name="description"
           id="description"
-          maxLength="400"  
+          maxLength="1000"
           value={tempWork['description']}
           onChange={(e) => setTempWork({...tempWork, description: e.target.value})}
           placeholder="Description of the Job"

@@ -66,7 +66,7 @@ const NewWorkForm = ({ work, setWork, setNewWorkFormVisible }) => {
         <textarea
           name="description"
           id="description"
-          maxLength="400"
+          maxLength="1000"
           placeholder="Description of the Job"
           value={newWork['description']}
           onChange={(e) => setNewWork({...newWork, description: e.target.value})}

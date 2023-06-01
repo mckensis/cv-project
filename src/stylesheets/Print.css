@@ -65,7 +65,7 @@
 
   /* About Me Paragraph */
   .about > p {
-    line-height: 12pt;
+    line-height: 11.5pt;
   }
 
   .personal ul:nth-of-type(2) {
@@ -81,12 +81,21 @@
   }
 
   .work-article {
-    grid-template-columns: minmax(120px, min-content) 1fr;
+    line-height: 11.5pt;
+    grid-template-columns: minmax(120px, max-content) 1fr;
+  }
+
+  .work-article > p {
+    white-space: pre-wrap;
   }
 
   /* Job Title, Company, Date */
   .work ul {
     font-size: 9pt;
+  }
+
+  .work li.primary {
+    font-size: 10pt;
   }
 
   .project-article {

@@ -1,6 +1,6 @@
 .work-article {
   display: grid;
-  grid-template-columns: minmax(130px, min-content) 1fr;
+  grid-template-columns: minmax(130px, max-content) 1fr;
   row-gap: 0.75rem;
   column-gap: 1rem;
 }
@@ -9,6 +9,7 @@
 .work-article > p {
   text-align: justify;
   min-height: max-content;
+  white-space: pre-wrap;
 }
 
 .work-article > p.maximised {
@@ -44,6 +45,7 @@ ul.work-info.condensed li:nth-last-of-type(1):not(.primary) {
 }
 
 .work li.primary {
+  font-size: 1.3rem;
   text-align: left;
 }
 

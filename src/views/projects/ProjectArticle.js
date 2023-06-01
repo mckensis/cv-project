@@ -1,6 +1,5 @@
 import { useState } from "react";
 import EditProjectForm from "./EditProjectForm";
-import { v4 as uuid } from "uuid";
 
 const ProjectArticle = ({ project, projects, setProjects, isEditing, countEditing, setCountEditing }) => {
   const [isEditingProjectArticle, setIsEditingProjectArticle] = useState(false);
